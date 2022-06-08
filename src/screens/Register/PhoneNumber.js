@@ -1,11 +1,23 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 import FooterImg from '../../components/FooterImg';
+import PhoneInput from 'react-native-phone-number-input';
+import { useNavigation } from '@react-navigation/native'; 
+
 
 // create a component
 const PhoneNumber = () => {
+
+
+    const navigation = useNavigation(); 
+
+    const [info, setInfo] = useState(''); 
+ 
+    const setTheinfo = () => { 
+            setInfo('You will receive an email to continue your account recovery.'); 
+    }
     return (
         <View style={tw`flex-1 items-center p-4`}>
             <View style={tw`flex-1 content-center items-center p-4`}>
@@ -14,15 +26,18 @@ const PhoneNumber = () => {
                 </View>
                 <View style={tw`mt-8`} />
                 <View style={tw`flex items-center`}>
+                    {/* <PhoneInput ref='phone'/> */}
                     <TextInput
                         placeholder="your@email.com"
                         keyboardType="email-address"
                         style={tw` w-72 px-3 py-3 rounded-full text-center border-2 border-green-700`}
-                        autoComplete='email'
+                        autoComplete='email' 
+                        onTextInput={setTheinfo}
+
 
                     />
-                    <Text style={tw`pl-3 flex items-center w-72 pt-2`}>
-                        You will receive an email to continue your account recovery.
+                    <Text style={tw`pl-3 flex items-center w-72 pt-2`} onChange> 
+                    {info}
                     </Text>
 
                 </View>
@@ -37,7 +52,7 @@ const PhoneNumber = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <FooterImg /> 
+            <FooterImg />
         </View>
     )
 };

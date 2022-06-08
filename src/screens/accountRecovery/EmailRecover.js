@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,12 @@ import FooterImg from '../../components/FooterImg';
 const EmailRecover = () => {
 
     const navigation = useNavigation();
+
+    const [info, setInfo] = useState(''); 
+ 
+    const setTheinfo = () => { 
+            setInfo('You will receive an email to continue your account recovery.'); 
+    }
 
     return (
         <View style={tw`flex-1 items-center p-4`}>
@@ -23,10 +29,11 @@ const EmailRecover = () => {
                         keyboardType="email-address"
                         style={tw` w-72 px-3 py-3 rounded-full text-center border-2 border-green-700`}
                         autoComplete='email'
+                        onTextInput={setTheinfo} 
 
                     />
                     <Text style={tw`pl-3 flex items-center w-72 pt-2`}>
-                        You will receive an email to continue your account recovery.
+                    {info}
                     </Text>
 
                 </View>

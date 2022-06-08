@@ -26,7 +26,7 @@ const Slide = ({ item }) => {
         <SafeAreaView style={tw`flex justify-center items-center`}>
             <Image 
                 source={item.image} 
-                style={{ height: '75%', width, resizeMode: 'contain' }} />
+                style={{ height: '70%', width, resizeMode: 'contain' }} />
             <View style={[tw`text-white text-2xl font-bold mt-4 text-center`, { fontSize: '3rem', color: 'white' }]}>
                 <Text style={[tw`max-w-xs px-4`,{lineHeight: 25}]}> {item.caption}</Text>
             </View>

@@ -3,8 +3,7 @@ import { Animated, TouchableOpacity, Text, View, Image, Button, SafeAreaView, Pr
 import { useNavigation } from '@react-navigation/native';
 import tw from 'tailwind-react-native-classnames';
 import loveImage from '../../assets/love_text_black.png';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';

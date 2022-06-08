@@ -1,6 +1,6 @@
 //import liraries
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 import { Ionicons } from '@expo/vector-icons';
 import FooterImg from '../../components/FooterImg';

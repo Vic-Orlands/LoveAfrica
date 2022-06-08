@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { MaterialIcons } from '@expo/vector-icons';
