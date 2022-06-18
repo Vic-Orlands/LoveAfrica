@@ -2,6 +2,7 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Splashscreen from './src/screens/Splashscreen';
 import HomeScreen from './src/screens/HomeScreen';
@@ -27,11 +28,20 @@ import AlmostDone from './src/screens/Register/AlmostDone';
 import Passion from './src/screens/Register/Passion';
 import Feeds from './src/screens/Home/Feeds';
 import Messages from './src/screens/Home/Messages';
-import Drawers from './src/screens/Home/Drawers';
 import SettingInfo from './src/screens/Home/settings/SettingInfo';
 import Likes from './src/screens/Home/Likes';
 import Chat from './src/screens/Home/Chat';
 import Gifted from './src/screens/Home/Gifted';
+import ChatStarter from './src/screens/Home/ChatStarter';
+import EditProfile from './src/screens/Home/settings/EditProfile';
+import ProfileInfo from './src/screens/Home/ProfileInfo';
+import Facebook from './src/screens/Home/Facebook';
+
+
+import Drawers from './src/Drawers';
+import MyDrawers from './src/components/MyDrawers';
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -48,12 +58,31 @@ const Stack = createNativeStackNavigator();
 // }, []);
 
 
-// create a component
+const Drawer = createDrawerNavigator();
+
+function DrawersRoutes() {
+  return (
+    <Drawer.Navigator swipeEnabled
+      drawerContent={(props) => <MyDrawers {...props} />}
+      options={{
+        headerShown: false,
+      }}
+    >
+
+      <Drawer.Screen name="Feeds" component={Feeds} options={{ headerShown: false }} />
+      <Drawer.Screen name="Likes" component={Likes} options={{ headerShown: false }} />
+      <Drawer.Screen name="Messages" component={Messages} options={{ headerShown: false }} />
+
+    </Drawer.Navigator>
+  );
+}
+
+
 const Pages = () => {
   return (
 
     // isAppLaunched != null && (
-    <Stack.Navigator initialRouteName="Messages">
+    <Stack.Navigator initialRouteName="Onboarding">
       {/* {isAppLaunched && ( */}
       <Stack.Screen name="Onboarding" component={Onboarding} options={{ title: "LoveAfrica", headerShown: false }} />
       {/* )}  */}
@@ -74,20 +103,26 @@ const Pages = () => {
       <Stack.Screen name="PhoneSuccess" component={PhoneSuccess} options={{ title: "LoveAfrica" }} />
       <Stack.Screen name="EmailInput" component={EmailInput} options={{ title: "LoveAfrica" }} />
       <Stack.Screen name="PasswordInput" component={PasswordInput} options={{ title: "LoveAfrica" }} />
-      <Stack.Screen name="NameInput" component={NameInput} options={{ title: "LoveAfrica" }} />
-      <Stack.Screen name="DobInput" component={DobInput} options={{ title: "LoveAfrica" }} />
+      <Stack.Screen name="NameInput" component={NameInput} options={{ title: "" }} />
+      <Stack.Screen name="DobInput" component={DobInput} options={{ title: "" }} />
       <Stack.Screen name="Gender" component={Gender} options={{ title: "LoveAfrica" }} />
       <Stack.Screen name="InterestedIn" component={InterestedIn} options={{ title: "LoveAfrica" }} />
       <Stack.Screen name="ChoosePhoto" component={ChoosePhoto} options={{ title: "LoveAfrica" }} />
-      <Stack.Screen name="AlmostDone" component={AlmostDone} options={{ title: "LoveAfrica" }} />
-      <Stack.Screen name="Passion" component={Passion} options={{ title: "LoveAfrica" }} />
-      <Stack.Screen name="Feeds" component={Feeds} options={{ title: " ", headerShown: false }} />
-      <Stack.Screen name="Messages" component={Messages} options={{ title: " ", headerShown: false }} />
-      {/* <Stack.Screen name="Drawers" component={Drawers} options={{ title: "Drawer" }} /> */}
+      <Stack.Screen name="AlmostDone" component={AlmostDone} options={{ headerShown: false }} />
+      <Stack.Screen name="Passion" component={Passion} options={{ title: "" }} />
+
+      <Stack.Screen name="Drawers" component={DrawersRoutes} options={{ headerShown: false }} />
+      
+      <Stack.Screen name="Feeds" component={Feeds} options={{ headerShown: false }} />
+      <Stack.Screen name="Messages" component={Messages} options={{ headerShown: false }} />
       <Stack.Screen name="SettingInfo" component={SettingInfo} options={{ headerShown: false }} />
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
       <Stack.Screen name="Likes" component={Likes} options={{ headerShown: false }} />
       <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Gifted" component={Gifted} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="ChatStarter" component={ChatStarter} options={{ headerShown: false }} />
+      <Stack.Screen name="ProfileInfo" component={ProfileInfo} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Facebook" component={Facebook} options={{ title: "Facebook" }} /> */}
 
     </Stack.Navigator>
   )

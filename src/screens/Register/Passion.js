@@ -11,35 +11,35 @@ const Passion = () => {
 
     const [Modals, setModals] = useState(false);
 
-    const myModalDetails = () => {
+    // const myModalDetails = () => {
 
-        return (
-            <Modal
-                visible={Modals}
-            
-            >
-                <View style={styles.modal}>
-                    <View style={tw`flex justify-center content-center bg-gray-200 items-center rounded-xl p-4 `}>
-                        <Text style={tw`text-center font-bold text-xl`}>
-                            Done!
-                        </Text>
-                        <View>
-                            <Text style={tw`text-center text-base pt-4`}>
-                                Your Profile has beeen created!
-                            </Text>
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate("Feeds")}
-                            style={[tw`flex mb-2 justify-center shadow items-center px-24 rounded-full mt-6 py-3 `, { backgroundColor: '#CC0000' }]}
-                        >
-                            <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+    //     return (
+    //         <Modal
+    //             visible={Modals}
 
-            </Modal>
-        )
-    }
+    //         >
+    //             <View style={styles.modal}>
+    //                 <View style={tw`flex justify-center content-center bg-gray-200 items-center rounded-xl p-4 `}>
+    //                     <Text style={[{ fontFamily: 'Bold' },tw`text-center text-xl`]}>
+    //                         Done!
+    //                     </Text>
+    //                     <View>
+    //                         <Text style={[{ fontFamily: 'Regular' }, tw`text-center text-base pt-4`]}>
+    //                             Your Profile has beeen created!
+    //                         </Text>
+    //                     </View>
+    //                     <TouchableOpacity
+    //                         onPress={() => navigation.navigate("Feeds")}
+    //                         style={[tw`flex mb-2 justify-center shadow items-center px-24 rounded-full mt-6 py-3 `, { backgroundColor: '#CC0000' }]}
+    //                     >
+    //                         <Text style={[{ fontFamily: 'Bold' }, tw`text-white text-center  text-base flex items-center text-xl`]}>Continue</Text>
+    //                     </TouchableOpacity>
+    //                 </View>
+    //             </View>
+
+    //         </Modal>
+    //     )
+    // }
 
     const navigation = useNavigation();
     // const Selected = () => {
@@ -52,64 +52,77 @@ const Passion = () => {
     //     )
     // }
 
+    const myPassion = [
+        {
+            id: 1,
+            text: 'Board Games',
+        },
+    ];
 
+    const Threes = () => {
+        return (
+
+            <View style={tw`flex-row mt-4`} >
+                <TouchableOpacity
+                    style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
+                >
+                    <Text style={tw`text-center p-3`}> Board Games</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
+                >
+                    <Text style={tw`text-center p-3`}>Swimming</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
+                >
+                    <Text style={tw`text-center p-3`}>Hiking</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
     return (
         <View style={tw`flex-1 items-center p-4`}>
-                <Modal
-                    visible={Modals}
-                    transparent
-                >
-                    <View style={styles.modal}>
-                        <View style={tw`flex justify-center content-center bg-gray-200 items-center rounded-xl p-4 `}>
-                            <Text style={tw`text-center font-bold text-xl`}>
-                                Done!
+            <Modal
+                visible={Modals}
+                transparent
+            >
+                <View style={styles.modal}>
+                    <View style={tw`flex justify-center content-center bg-gray-200 items-center rounded-xl p-4 `}>
+                        <Text style={[{ fontFamily: 'Bold' }, tw`text-center text-xl`]}>
+                            Done!
+                        </Text>
+                        <View>
+                            <Text style={[{ fontFamily: 'Regular' }, tw`text-center text-base pt-4`]}>
+                                Your Profile has been created!
                             </Text>
-                            <View>
-                                <Text style={tw`text-center text-base pt-4`}>
-                                    Your Profile has been created!
-                                </Text>
-                            </View>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate("Feeds")}
-                                style={[tw`flex mb-2 justify-center shadow items-center px-24 rounded-full mt-6 py-3 `, { backgroundColor: '#CC0000' }]}
-                            >
-                                <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
-                            </TouchableOpacity>
                         </View>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("Drawers")}
+                            style={[tw`flex mb-2 justify-center shadow items-center px-24 rounded-full mt-6 py-3 `, { backgroundColor: '#CC0000' }]}
+                        >
+                            <Text style={[{ fontFamily: 'Bold' }, tw`text-white text-center text-base flex items-center text-xl`]}>Continue</Text>
+                        </TouchableOpacity>
                     </View>
-                </Modal>
+                </View>
+            </Modal>
 
 
             <ScrollView>
                 <View style={tw`flex-1 `}>
                     <View style={tw``}>
-                        <Text style={tw`font-bold text-2xl pb-4`}>  Passion</Text>
+                        <Text style={[{ fontFamily: 'Bold' }, tw` text-2xl pb-4`]}>  Passion</Text>
                     </View>
                     <View style={tw`px-4`}>
-                        <Text style={tw`w-72`}>
+                        <Text style={[{ fontFamily: 'Regular' }, tw`w-72`]}>
                             Let everyone know what you’re passionate about. <Text style={[tw`opacity-25 text-xs`]}>(Choose Five).</Text>
                         </Text>
                     </View>
                     <View style={[tw`pt-8 rounded-xl`]}>
-                        <View style={tw`flex-row`}>
-                            <TouchableOpacity
-                                style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
-                            >
-                                <Text style={tw`text-center p-3`}>Board Games</Text>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
-                            >
-                                <Text style={tw`text-center p-3`}>Swimming</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                style={[tw`mr-2 flex  rounded-full `, { backgroundColor: '#F0E0E0' }]}
-                            >
-                                <Text style={tw`text-center p-3`}>Hiking</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <Threes />
 
                         <View style={tw`flex-row mt-4`}>
                             <TouchableOpacity
@@ -505,7 +518,7 @@ const Passion = () => {
                     onPress={() => { setModals(true) }}
                     style={[tw`flex mb-2 justify-center shadow items-center w-72 rounded-full py-3 `, { backgroundColor: '#CC0000' }]}
                 >
-                    <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
+                    <Text style={[{ fontFamily: 'Bold' }, tw`text-white text-center  text-base flex items-center text-xl`]}>Continue</Text>
                 </TouchableOpacity>
 
             </View>
@@ -524,8 +537,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalview: {
-        width:300,
-        height:200,
+        width: 300,
+        height: 200,
     }
 });
 

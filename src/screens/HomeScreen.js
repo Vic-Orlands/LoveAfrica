@@ -36,6 +36,26 @@ const HomeScreen = () => {
   // }
   const navigation = useNavigation();
 
+  const Reuse = ({ iconText, text, linkTo }) => {
+    return (
+      <>
+        <TouchableOpacity
+          style={tw`bg-white w-72 rounded-full py-4 `}
+          onPress={linkTo}
+
+        >
+          <Text style={tw`pl-4 text-center font-bold `}>
+
+            {iconText}
+            <Text style={[{ fontFamily: 'Bold' }, tw`pl-12`]}>{text}
+            </Text>
+          </Text>
+        </TouchableOpacity>
+        <View style={tw`mt-4`} />
+      </>
+    );
+  };
+
   return (
     <SafeAreaView style={tw`h-full flex-1`}>
       <View style={tw` h-full flex-1 items-center`}>
@@ -45,36 +65,24 @@ const HomeScreen = () => {
         <View style={tw`mt-12`} />
         <View style={[tw`rounded-t-3xl w-full h-full`, { backgroundColor: '#CC0000' }]}>
           <View style={tw`mt-6 flex justify-center`}>
-            <Text style={tw`font-bold text-3xl text-white text-center`}>
+            <Text style={[{ fontFamily: 'Bold' }, tw` text-3xl text-white text-center`]}>
               Sign In
             </Text>
             {/* USer sign In */}
             <View style={tw`mt-8 flex justify-center items-center`}>
               {/* Phone reg */}
-              <TouchableOpacity
-                style={tw`bg-white w-72 rounded-full py-4 `}
-                onPress={() => navigation.navigate("Phone")} 
 
-              >
-                <Text style={tw`text-center font-bold`}><Phone /> Sign in with Phone Number</Text>
-              </TouchableOpacity>
-              <View style={tw`mt-4`} />
+              <Reuse text='Sign in with Phone Number' iconText={<Phone />} linkTo={() => navigation.navigate("Phone")} />
+
 
               {/* Google reg */}
-              <TouchableOpacity
-                style={tw`bg-white w-72 rounded-full py-4 `}
-              >
-                <Text style={tw`text-center font-bold`}><Google style={tw`text-left`} />Sign in with Google</Text>
-              </TouchableOpacity>
-              <View style={tw`mt-4`} />
+              <Reuse text='Sign in with Google' iconText={<Google style={tw`text-left`} />} />
+
+
 
               {/* Facebook reg */}
-              <TouchableOpacity
-                style={tw`bg-white w-72 rounded-full py-4 `}
-              >
-                <Text style={tw`pl-4 text-center font-bold `}><Facebook style={tw`pr-12`} /> <Text style={tw`pl-12`}>Sign in with Facebook</Text></Text>
-              </TouchableOpacity>
-              <View style={tw`mt-4`} />
+              <Reuse text='Sign in with Facebook' iconText={<Facebook style={tw`pr-12`} />} />
+
 
             </View>
 
@@ -82,21 +90,21 @@ const HomeScreen = () => {
             <Pressable
               onPress={() => navigation.navigate("RecoverScreen")}
             >
-              <Text style={tw`text-center text-white text-xl`}>Can't Login?</Text>
+              <Text style={[{ fontFamily: 'Bold' }, tw`text-center text-white text-xl`]}>Can't Login?</Text>
             </Pressable>
 
             {/* <Button title='Splash Screen' onPress={() => navigation.navigate("Splashscreen")} /> */}
             {/* Text for sign in here */}
             <View style={tw`mt-12 w-full border border-white`} />
             <View style={tw`pt-6`}>
-              <Text style={tw`text-white max-w-sm text-center px-4 `}>
+              <Text style={[{ fontFamily: 'Bold' }, tw`text-white max-w-sm text-center px-4 `]}>
                 By signing in, you have read and agreed with our
               </Text>
               <View >
                 <Pressable
                 // onPress={}
                 >
-                  <Text style={tw`text-center text-blue-200`}>
+                  <Text style={[{ fontFamily: 'Bold' }, tw`text-center text-blue-200`]}>
                     Terms and condition
                   </Text>
                 </Pressable>

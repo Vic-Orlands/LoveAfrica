@@ -23,13 +23,13 @@ const PhoneSuccess = () => {
 
                 <View style={tw`flex-1 content-center items-center p-4`}>
                     <View style={tw`pt-2`}>
-                        <Text style={tw`font-bold text-3xl text-center pb-4`}>Successful</Text>
+                        <Text style={[{ fontFamily: 'Bold'} ,tw` text-3xl text-center pb-4`]}>Successful</Text>
                     </View>
                     <View style={tw`mt-2`} />
                     <View style={tw`flex items-center`}>
-                        <CheckMark />
+                        <CheckMark /> 
                         <View style={tw`pt-12`} />
-                        <Text style={[tw`pl-3 flex text-center w-72 pt-2 pb-4`, { lineHeight: 20 }]}>
+                        <Text style={[tw`pl-3 flex text-center w-72 pt-2 pb-4`, { lineHeight: 20, fontFamily: 'Regular' }]}>
                             Your number have been successfully verified. Proceed to the account setup.
                         </Text>
                         <View style={tw`pt-36`} />
@@ -39,7 +39,7 @@ const PhoneSuccess = () => {
                             style={[tw`flex justify-center shadow items-center w-72 rounded-full py-3 `, { backgroundColor: '#CC0000' }]}
 
                         >
-                            <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
+                            <Text style={[{ fontFamily: 'Bold'} , tw`text-white text-center font-bold text-base flex items-center text-xl`]}>Continue</Text>
                         </TouchableOpacity>
                     </View>
 

@@ -14,7 +14,7 @@ const Gender = () => {
         <View style={tw`flex-1 items-center p-4`}>
             <View style={tw`flex-1 p-4`}>
                 <View style={tw`pt-2`}>
-                    <Text style={tw`font-bold text-3xl text-center pb-4`}>Gender</Text>
+                    <Text style={[ { fontFamily: 'Bold'}, tw` text-3xl text-center pb-4`]}>Gender</Text>
                 </View>
                 <View style={tw`mt-8`} /> 
                 <View style={tw`flex items-center pt-4`}> 
@@ -23,7 +23,7 @@ const Gender = () => {
                         style={[tw` w-72 px-3 py-4 rounded-xl text-center shadow`, { backgroundColor: '#F0E0E0' }]}
 
                     >
-                        <Text style={tw`text-center`}>Male</Text>
+                        <Text style={[ { fontFamily: 'Regular'}, tw`text-center`]}>Male</Text>
                     </TouchableOpacity> 
                 </View>
 
@@ -34,7 +34,7 @@ const Gender = () => {
                         style={[tw` w-72 px-3 py-4 rounded-xl text-center shadow`, { backgroundColor: '#F0E0E0' }]}
 
                     >
-                        <Text style={tw`text-center`}>Female</Text>
+                        <Text style={[ { fontFamily: 'Regular'}, tw`text-center`]}>Female</Text>
                     </TouchableOpacity> 
                 </View>
 
@@ -45,7 +45,7 @@ const Gender = () => {
                         style={[tw` w-72 px-3 py-4 rounded-xl text-center shadow`, { backgroundColor: '#F0E0E0' }]}
 
                     >
-                        <Text style={tw`text-center`}>Prefer Not to say</Text>
+                        <Text style={[ { fontFamily: 'Regular'}, tw`text-center`]}>Prefer Not to say</Text>
                     </TouchableOpacity> 
                 </View>
 
@@ -55,7 +55,7 @@ const Gender = () => {
                         onPress={() => navigation.navigate("InterestedIn")}
                         style={[tw`flex justify-center shadow items-center w-72 rounded-full py-3 `, { backgroundColor: '#CC0000' }]}
                     >
-                        <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
+                        <Text style={[ { fontFamily: 'Bold'}, tw`text-white text-center  text-base flex items-center text-xl`]}>Continue</Text>
                     </TouchableOpacity>
 
                 </View>

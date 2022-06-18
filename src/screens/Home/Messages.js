@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import MsgHeader from '../../components/MsgHeader';
 import { ScrollView } from 'react-native-gesture-handler';
 import img from '../../../assets/splash.png'
-import { NavigationContainer } from '@react-navigation/native';
 
 
 const msgData = [
@@ -116,6 +115,7 @@ const Messages = () => {
                                 // onPress={() => navigation.navigate("Gifted")}
                                 onPress={() => navigation.navigate("Chat")}
 
+
                             >
                                 <View style={tw`flex items-center`}>
                                     <Image
@@ -124,16 +124,16 @@ const Messages = () => {
                                     />
                                 </View>
                                 <View style={tw`pl-3 w-48 flex-grow`}>
-                                    <Text style={tw`font-bold   text-base`}>
+                                    <Text style={[{fontFamily: 'Bold'} ,tw`text-base`]}>
                                         {item.name}
                                     </Text>
-                                    <Text style={tw`text-xs  overflow-hidden flex-grow pb-4`}>
+                                    <Text style={[{fontFamily: 'Regular'} , tw`text-xs  overflow-hidden flex-grow pb-4`]}>
                                         {item.text}
                                     </Text>
                                 </View>
 
                                 <View style={tw`flex-grow `}>
-                                    <Text style={tw`text-xs text-right`}>
+                                    <Text style={[{fontFamily: 'Light'} ,tw`text-xs text-right`]}>
                                         {item.time}
                                     </Text>
                                 </View>
@@ -160,7 +160,7 @@ const Messages = () => {
                 <MsgHeader />
                 <View style={tw`px-6 w-full`}>
                     <View>
-                        <Text style={tw`font-bold text-2xl pt-4`}>
+                        <Text style={[{fontFamily: 'Bold'} ,tw` text-2xl pt-4`]}>
                             Messages
                         </Text>
                     </View>
@@ -206,6 +206,7 @@ const Messages = () => {
 
                                 // )}
                                 ListFooterComponent={<ScrollViews />}
+                                style={tw` mb-12`}
 
                             />
 

@@ -12,7 +12,7 @@ const AlmostDone = () => {
     useEffect(() => {
         setTimeout(() => {
           navigation.navigate("Passion");
-        }, 3000);
+        }, 1000);
       });
 
 
@@ -21,7 +21,7 @@ const AlmostDone = () => {
             <Pressable
                 onPress={() => navigation.navigate("Passion")}
             >
-                <Text style={tw`font-bold text-2xl`}>You're Almost Done</Text>
+                <Text style={[{ fontFamily: 'Bold' },tw` text-2xl`]}>You're Almost Done</Text>
             </Pressable>
         </View>
     );

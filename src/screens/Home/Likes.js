@@ -4,19 +4,56 @@ import { View, Text, StyleSheet, SafeAreaView, StatusBar, Pressable, Image, Imag
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import myImg from '../../../assets/splash.png'
-import LikesHeader from '../../components/LikesHeader';
+import Header from '../../components/Header';
 import { Entypo } from '@expo/vector-icons';
 
 
 
 // create a component
 const Likes = () => {
+    const navigation = useNavigation();
+
+    const Liked = ({ username, myImgs }) => {
+
+        return (
+            <View style={tw`w-1/2  justify-center `}>
+                <View style={tw`flex justify-evenly items-center`}>
+
+                    <View style={tw`w-32 h-32 relative rounded-xl `}>
+                        <ImageBackground
+                            source={myImgs}
+                            resizeMode="cover"
+                            style={tw`h-full w-full rounded-xl`}  >
+
+                            <View style={tw`bg-black bg-opacity-25 w-full rounded-b-xl left-0 absolute bottom-0 flex-row items-center`}>
+                                <View>
+                                    <Text style={[{ fontFamily: 'Bold' }, tw` text-white p-2 text-xs w-24 overflow-hidden  `]}>
+                                        {username}
+                                    </Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate('ProfileInfo')}
+                                    >
+                                        <Entypo name="info-with-circle" size={20} color="#cc0000" />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                        </ImageBackground>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+
     return (
         <SafeAreaView style={[styles.container, tw``]}>
             <View style={tw`mt-3   h-full`}>
                 {/* Header */}
                 <View>
-                    <LikesHeader />
+                    <Header activeLikes={tw`underline border-b-2 border-red-700  pb-1`} />
+
                 </View>
                 {/* Header */}
 
@@ -26,12 +63,13 @@ const Likes = () => {
                     <Pressable
                         style={tw`p-2`}
                     >
-                        <Text style={tw`text-xl w-full opacity-25`}>Your Likes</Text>
+                        <Text style={[{ fontFamily: 'Regular' }, tw`text-xl w-full opacity-25`]}>Your Likes</Text>
                     </Pressable>
+
                     <Pressable
                         style={tw`p-2`}
                     >
-                        <Text style={tw`text-xl w-full`} >Your Matches</Text>
+                        <Text style={[{ fontFamily: 'Regular' }, tw`text-xl w-full`]} >Your Matches</Text>
                     </Pressable>
                 </View>
 
@@ -40,63 +78,8 @@ const Likes = () => {
                     <View style={tw`px-6 mb-6 w-full`}>
 
                         <View style={tw`w-full flex flex-row  justify-evenly items-center`}>
-                            <View style={tw`w-1/2  justify-center `}>
-                                <View style={tw`flex justify-evenly items-center`}>
-
-                                    <View style={tw`w-32 h-32 relative rounded-xl `}>
-                                        <ImageBackground
-                                            source={myImg}
-                                            resizeMode="cover"
-                                            style={tw`h-full w-full rounded-xl`}  >
-
-                                            <View style={tw`bg-black bg-opacity-25 w-full rounded-b-xl left-0 absolute bottom-0 flex-row items-center`}>
-                                                <View>
-                                                    <Text style={tw` text-white p-2 text-xs w-24 overflow-hidden  `}>
-                                                        sdsdsss
-                                                    </Text>
-                                                </View>
-                                                <View>
-                                                    <TouchableOpacity
-
-                                                    >
-                                                        <Entypo name="info-with-circle" size={20} color="#cc0000" />
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
-
-                                        </ImageBackground>
-                                    </View>
-                                </View>
-                            </View>
-
-                            <View style={tw`w-1/2  justify-center `}>
-                                <View style={tw`flex justify-evenly items-center`}>
-
-                                    <View style={tw`w-32 h-32 relative rounded-xl `}>
-                                        <ImageBackground
-                                            source={myImg}
-                                            resizeMode="cover"
-                                            style={tw`h-full w-full rounded-xl`}  >
-
-                                            <View style={tw`bg-black bg-opacity-25 w-full rounded-b-xl left-0 absolute bottom-0 flex-row items-center`}>
-                                                <View>
-                                                    <Text style={tw` text-white p-2 text-xs w-24 overflow-hidden  `}>
-                                                        sdsdsss
-                                                    </Text>
-                                                </View>
-                                                <View>
-                                                    <TouchableOpacity
-
-                                                    >
-                                                        <Entypo name="info-with-circle" size={20} color="#cc0000" />
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
-
-                                        </ImageBackground>
-                                    </View>
-                                </View>
-                            </View>
+                            <Liked myImgs={myImg} username='Bright' />
+                            <Liked myImgs={myImg} username='Ella' />
 
 
                         </View>

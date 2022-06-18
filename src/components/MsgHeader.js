@@ -15,8 +15,9 @@ const MsgHeader = () => {
 
         <View style={[styles.flex, tw`px-6 flex-row items-center pt-3`]}>
             <TouchableOpacity
-            //   onPress={() => navigation.goBack()}
-              >
+                onPress={() => navigation.goBack(null)}
+
+            >
                 <Ionicons name="chevron-back" size={30} color="black" />
             </TouchableOpacity>
 
@@ -30,7 +31,8 @@ const MsgHeader = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => { navigation.navigate('Messages') }}
+                onPress={() => navigation.openDrawer()}
+
             >
                 <AntDesign name="menu-unfold" size={26} color="#000000" />
 

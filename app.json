@@ -8,12 +8,12 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "ldpi": "./assets/img/splashscreen.png",
-      "mdpi": "./assets/img/splashscreen.png",
-      "hdpi": "./assets/img/splashscreen.png",
-      "xhdpi": "./assets/img/splashscreen.png",
-      "xxhdpi": "./assets/img/splashscreen.png",
-      "xxxhdpi": "./assets/img/splashscreen.png",
+      "ldpi": "./assets/splash.png",
+      "mdpi": "./assets/splash.png",
+      "hdpi": "./assets/splash.png",
+      "xhdpi": "./assets/splash.png",
+      "xxhdpi": "./assets/splash.png",
+      "xxxhdpi": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

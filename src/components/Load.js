@@ -5,11 +5,15 @@ import tw from 'tailwind-react-native-classnames';
 
 const Load = () => {
     return (
-        <SafeAreaView style={tw` flex justify-center items-center`}>
-            <View style={tw` flex justify-center items-center`}>
-                <Image source={load}/> 
-            </View> 
-        </SafeAreaView>
+        <>
+            <ImageBackground
+                source={load}
+                resizeMode="contain"
+                style={tw`h-full w-full`}  >
+
+            </ImageBackground>
+        </>
+
     )
 }
 

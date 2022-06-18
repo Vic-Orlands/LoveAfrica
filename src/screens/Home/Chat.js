@@ -1,17 +1,19 @@
 //import liraries
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, StatusBar, ScrollView, TouchableOpacity, Image, TextInput, TextBase } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
-import LikesHeader from '../../components/LikesHeader';
 import { Entypo, AntDesign, FontAwesome, MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import img from '../../../assets/splash.png'
+import useAuth from '../../auth/useAuth';
 
 
-
+// The Entire code is just for testing. Implement the main chat. the Video call and voice call ia agora based 
 
 // create a component
 const Chat = () => {
+
+    const { user } = useAuth();
     const navigation = useNavigation();
 
     const [IsFocused, setIsFocused] = useState(false);
@@ -22,7 +24,7 @@ const Chat = () => {
     const sendMessage = () => {
 
     }
-    
+
     useEffect(() => {
         if (text !== null) {
             setshowMe(true);
@@ -118,7 +120,7 @@ const Chat = () => {
 
                         <View style={tw``}>
                             <TouchableOpacity
-                            //   onPress={() => navigation.goBack()}
+                                onPress={() => navigation.goBack(null)}
                             >
                                 <Ionicons name="chevron-back" size={30} color="#cc0000" />
                             </TouchableOpacity>
@@ -138,10 +140,10 @@ const Chat = () => {
                                     />
                                 </View>
                                 <View style={tw`pl-2  flex justify-center  `}>
-                                    <Text style={tw`font-bold  text-base`}>
+                                    <Text style={[{ fontFamily: 'Bold' }, tw`  text-base`]}>
                                         Ozoemana Bright
                                     </Text>
-                                    <Text style={tw`text-xs`}>
+                                    <Text style={[{ fontFamily: 'Regular' }, tw`text-xs`]}>
                                         Online
                                     </Text>
                                 </View>
@@ -171,10 +173,10 @@ const Chat = () => {
                         <View>
                             <View style={tw` flex w-full rounded-xl`} >
                                 <View style={tw`w-3/4 ml-3 p-3 bg-red-200  mb-2 rounded-r-3xl rounded-t-3xl `}>
-                                    <Text>
-                                        dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd
+                                    <Text style={{ fontFamily: 'Regular', lineHeight: 18 }}>
+                                        dsdsd dsdsd dsdsd dsdsd dsdsd d ddf ff d dd sdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd
                                     </Text>
-                                    <Text style={tw`text-xs opacity-50 pt-2`}>
+                                    <Text style={[{ fontFamily: 'Regular' }, tw`text-xs opacity-50 pt-2`]}>
                                         time
                                     </Text>
                                 </View>
@@ -186,10 +188,10 @@ const Chat = () => {
                         <View>
                             <View style={tw` flex w-full items-end rounded-xl`} >
                                 <View style={tw`w-3/4 mr-3 p-3 bg-red-100  mb-2 rounded-l-3xl rounded-t-3xl `}>
-                                    <Text>
+                                    <Text style={{ fontFamily: 'Regular', lineHeight: 18 }}>
                                         dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd dsdsd
                                     </Text>
-                                    <Text style={tw`text-xs opacity-50 text-right pt-2`}>
+                                    <Text style={[{ fontFamily: 'Regular' }, tw`text-xs opacity-50 text-right pt-2`]}>
                                         time
                                     </Text>
                                 </View>

@@ -1,11 +1,12 @@
 //import liraries
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, Image, Pressable } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 import Header from '../../components/Header';
 import Swiper from 'react-native-deck-swiper';
 import trash from '../../../assets/gallery.png'
 import trashtwo from '../../../assets/splash.png'
+import { useNavigation } from '@react-navigation/native';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 
 
@@ -37,7 +38,7 @@ const Feeds = () => {
                 <View style={[{ backgroundColor: '#4CD964' }, tw`p-3 mb-3 rounded-full `]}>
                     <AntDesign name="heart" size={30} color="white" />
                 </View>
-                <Text style={[{ color: '#4CD964', borderColor: '#4CD964' }, tw`font-bold text-base border rounded-xl px-3 pt-1`]}>
+                <Text style={[{ fontFamily: 'Bold', color: '#4CD964', borderColor: '#4CD964' }, tw` text-base border rounded-xl px-3 pt-1`]}>
                     LIKE
                 </Text>
             </View>
@@ -51,7 +52,7 @@ const Feeds = () => {
                 <View style={[{ backgroundColor: '#cc0000' }, tw`p-3 mb-3 rounded-full `]}>
                     <Entypo name="cross" size={34} color="white" />
                 </View>
-                <Text style={[{ color: '#cc0000', borderColor: '#cc0000' }, tw`font-bold text-base border rounded-xl px-3 pt-1`]}>
+                <Text style={[{ fontFamily: 'Bold', color: '#cc0000', borderColor: '#cc0000' }, tw` text-base border rounded-xl px-3 pt-1`]}>
                     NOPE
                 </Text>
             </View>
@@ -59,13 +60,17 @@ const Feeds = () => {
         )
     }
 
+    const navigation = useNavigation();
+
 
     const swipeRef = useRef(null);
+
+
     return (
         <SafeAreaView style={[styles.container, tw``]}>
             <View style={tw`mt-3   h-full`}>
                 {/* Header */}
-                <Header />
+                <Header activeHome={tw`underline border-b-2 border-red-700  pb-1`} />
                 {/* Header */}
 
 
@@ -130,30 +135,34 @@ const Feeds = () => {
                         verticalSwipe={false}
                         cards={DUMMY_data}
                         renderCard={(card) =>
-                            // card ?
-                             (
-                                <View
-                                    key={card.id} style={tw` bg-white h-3/4 rounded-xl`}>
-                                    <Image style={tw`h-full w-full rounded-xl top-0 `}
-                                        source={card.imags} />
+                        // card ?
+                        (
+                            <View
+                                key={card.id} style={tw` bg-white h-3/4 rounded-xl`}>
+                                <Image style={tw`h-full w-full rounded-xl top-0 `}
+                                    source={card.imags} />
 
-                                    <View style={tw`flex-row items-center justify-center absolute bottom-0 bg-black w-full h-16 bg-opacity-25 rounded-b-xl`}>
-                                        <View style={tw`flex  items-center`}>
-                                            <Text style={tw` pt-3 text-base text-white font-bold`}>
-                                                {card.firstName},   {card.age}
-                                            </Text>
+                                <View style={tw`flex-row items-center justify-center absolute bottom-0 bg-black w-full h-16 bg-opacity-25 rounded-b-xl`}>
+                                    <View style={tw`flex  items-center justify-center `}>
+                                        <Text style={[{ fontFamily: 'Bold' }, tw` pt-3 text-base text-white `]}>
+                                            {card.firstName},   {card.age}
+                                        </Text>
 
-                                        </View>
-                                        <View style={tw`flex items-center pl-2`}>
+                                    </View>
+                                    <View style={tw`flex items-center justify-center  pl-2`}>
+                                        <Pressable
+                                            onPress={() => navigation.navigate('ProfileInfo')}
+                                        >
                                             <Entypo name="info-with-circle" size={20} color="#cc0000" />
-                                        </View>
-
+                                        </Pressable>
                                     </View>
 
                                 </View>
 
+                            </View>
 
-                            ) 
+
+                        )
                             // : (
 
                             //     <Text

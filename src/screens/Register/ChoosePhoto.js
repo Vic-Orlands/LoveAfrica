@@ -45,12 +45,12 @@ const ChoosePhoto = () => {
         <View style={tw`flex-1 items-center p-4`}>
             <View style={tw`flex-1 p-4`}>
                 <View style={tw`pt-2`}>
-                    <Text style={tw`font-bold text-2xl pb-4`}>  Profile
+                    <Text style={[{ fontFamily: 'Bold' },tw` text-3xl pb-4`]}>  Profile
                         Photo</Text>
                 </View>
                 <View style={[tw`flex items-center pt-4  rounded-xl py-12`, styles.rounded]}>
                     <Pressable
-                        // onPress={OpenGallery}
+                    // onPress={OpenGallery}
                     >
                         <Image
                             source={gallery} style={{ width: 300, height: 150, resizeMode: 'contain' }}
@@ -59,7 +59,7 @@ const ChoosePhoto = () => {
                 </View>
 
                 <View style={tw`flex  items-center`}>
-                    <Text>hello ther</Text>
+                    <Text>Imae here</Text>
                     {/* <Image source={imageUri} style={{ width: 300, height: 150, resizeMode: 'contain' }}/> */}
                 </View>
                 <View style={tw`mt-24`} />
@@ -68,7 +68,7 @@ const ChoosePhoto = () => {
                         onPress={() => navigation.navigate("AlmostDone")}
                         style={[tw`flex justify-center shadow items-center w-72 rounded-full py-3 `, { backgroundColor: '#CC0000' }]}
                     >
-                        <Text style={tw`text-white text-center font-bold text-base flex items-center text-xl`}>Continue</Text>
+                        <Text style={[{ fontFamily: 'Bold' }, tw`text-white text-center text-base flex items-center text-xl`]}>Continue</Text>
                     </TouchableOpacity>
 
                 </View>

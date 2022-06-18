@@ -1,21 +1,21 @@
 import React, { useRef, useState } from 'react'
 import tw from 'tailwind-react-native-classnames'
-import { Button, Image, StyleSheet , SafeAreaView, Text, View,  FlatList, TouchableOpacity, Dimensions} from 'react-native' 
+import { Button, Image, StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native'
 import slideOne from '../../assets/onboardone.png';
 import slideTwo from '../../assets/onboardtwo.png';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const whitish = { white: '#fff' };
 const slides = [
     {
         id: 1,
         image: slideOne,
-        caption: <Text>Make connections with people around the world and get matched with like-minded individuals. <Text style={[tw`pt-4`,{fontWeight:'bold'}]}>Dare to meet your match.</Text></Text>,
+        caption: <Text>Make connections with people around the world and get matched with like-minded individuals. <Text style={[tw`pt-4`, { fontWeight: 'bold' }]}>Dare to meet your match.</Text></Text>,
     },
     {
         id: 2,
         image: slideTwo,
-        caption: 'Use the Chat Starter to engage with your matches. It is a great way to test compatability and learn about each other', 
+        caption: 'Use the Chat Starter to engage with your matches. It is a great way to test compatability and learn about each other',
     },
 ];
 
@@ -24,13 +24,13 @@ const slides = [
 const Slide = ({ item }) => {
     return (
         <SafeAreaView style={tw`flex justify-center items-center`}>
-            <Image 
-                source={item.image} 
-                style={{ height: '70%', width, resizeMode: 'contain' }} />
-            <View style={[tw`text-white text-2xl font-bold mt-4 text-center`, { fontSize: '3rem', color: 'white' }]}>
-                <Text style={[tw`max-w-xs px-4`,{lineHeight: 25}]}> {item.caption}</Text>
+            <Image
+                source={item.image}
+                style={{ height: '40%', width, resizeMode: 'contain' }} />
+            <View style={[tw`text-white text-2xl font-bold mt-8 text-center`, { fontSize: '3rem', color: 'white' }]}>
+                <Text style={[tw`max-w-xs text-base px-4`, { lineHeight: 25, fontFamily: 'Bold' }]}> {item.caption}</Text>
             </View>
-            
+
         </SafeAreaView>
     )
 }
@@ -56,7 +56,7 @@ const Onboarding = ({ navigation }) => {
                             backgroundColor: '#CC0000',
                             width: 10,
                             height: 5,
-                            borderRadius:50,
+                            borderRadius: 50,
                         }]} />
                     ))}
                 </View>
@@ -66,14 +66,14 @@ const Onboarding = ({ navigation }) => {
                         ?
                         <View style={{ height: 50 }}>
                             <TouchableOpacity style={[styles.btn]} onPress={() => navigation.replace('Home')}>
-                                <Text style={tw`text-white font-bold text-xl`}>Sign In</Text>
+                                <Text style={[{ fontFamily: 'Bold' }, tw`text-white  text-xl`]}>Sign In</Text>
                             </TouchableOpacity>
                         </View>
                         :
 
                         <View style={{ height: 50 }}>
                             <TouchableOpacity onPress={nextSlide} style={[styles.btn]}>
-                                <Text style={tw`text-white font-bold text-xl`}>Next</Text>
+                                <Text style={[{ fontFamily: 'Bold' }, tw`text-white  text-xl`]}>Next</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -128,7 +128,7 @@ styles = StyleSheet.create({
     },
     btn: {
         backgroundColor: '#CC0000',
-        color: whitish.white, 
+        color: whitish.white,
         borderRadius: 50,
         flex: 1,
         paddingHorizontal: 10,
