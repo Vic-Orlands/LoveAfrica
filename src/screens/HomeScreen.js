@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import { TouchableOpacity, Text, View, Image, SafeAreaView, Pressable, TextBase } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import tw from 'tailwind-react-native-classnames';
-import loveImage from '../../assets/love_text_black.png';
 import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import loveImage from '../../assets/love_text_black.png';
+import tw from 'tailwind-react-native-classnames';
 
+import Loading from '../components/Loading';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import Loading from '../components/Loading';
 
 // import react toastify module
 import Toast from 'react-native-toast-message';
@@ -36,7 +37,7 @@ const Phone = () => {
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
-	const { promptAsync, setLoading, loading } = useAuth();
+	const { promptAsync } = useAuth();
 
 	// style the toast messages
 	const toastConfig = {
@@ -47,7 +48,7 @@ const HomeScreen = () => {
 					width: '90%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: '#fff',
+					backgroundColor: 'green',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -56,7 +57,7 @@ const HomeScreen = () => {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 14 }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
@@ -81,8 +82,6 @@ const HomeScreen = () => {
 	};
 
 	const GoogleLogin = () => {
-		setLoading(true);
-
 		promptAsync()
 			.then((res) => {
 				if (res.type === 'success') {
@@ -90,8 +89,6 @@ const HomeScreen = () => {
 					const auth = getAuth();
 					const credential = GoogleAuthProvider.credential(idToken, accessToken);
 					signInWithCredential(auth, credential);
-
-					console.log(res);
 
 					Toast.show({
 						type: 'success',
@@ -102,9 +99,7 @@ const HomeScreen = () => {
 					});
 
 					setTimeout(() => {
-						navigation.navigate('UpdateModal', {
-							user: res
-						});
+						navigation.navigate('Feeds');
 					}, 2000);
 				}
 			})
@@ -116,19 +111,8 @@ const HomeScreen = () => {
 					visibilityTime: 2000,
 					autoHide: true
 				});
-			})
-			.finally(() => setLoading(false));
+			});
 	};
-
-	// let [Loaded] = useFonts({
-	//   "NexaLight": require("../../assets/fonts/NexaLight.otf"),
-	//   "NexaRegular": require("../../assets/fonts/NexaRegular.otf"),
-	//   "NexaBold": require("../../assets/fonts/NexaBold.otf")
-	// });
-
-	// if(!Loaded) {
-	//   return <Loading />;
-	// }
 
 	const Reuse = ({ iconText, text, linkTo }) => {
 		return (
@@ -178,28 +162,11 @@ const HomeScreen = () => {
 							/>
 
 							{/* Google reg */}
-							{loading ? (
-								<View
-									style={[
-										tw`bg-white w-72 rounded-full py-4 mb-4 `,
-										{
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
-											textAlign: 'center',
-											flexDirection: 'row'
-										}
-									]}
-								>
-									<Text style={tw`font-bold pl-1`}>Loading...</Text>
-								</View>
-							) : (
-								<Reuse
-									text="Sign up with Google"
-									iconText={<Google style={tw`text-left`} />}
-									linkTo={GoogleLogin}
-								/>
-							)}
+							<Reuse
+								text="Sign up with Google"
+								iconText={<Google style={tw`text-left`} />}
+								linkTo={GoogleLogin}
+							/>
 
 							{/* Sign in/ Log in */}
 							<Reuse

@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import HomeScreen from './src/screens/HomeScreen';
@@ -45,19 +44,6 @@ import Drawers from './src/Drawers';
 import { Text } from 'react-native';
 
 const Stack = createNativeStackNavigator();
-
-// const [isAppLaunched, setisAppLaunched] = useState(null);
-// useEffect(async() => {
-//   const appData = await AsyncStorage.getItem('isApLaunched');
-
-//   if (appData == null) {
-//     setisAppLaunched(true);
-//     AsyncStorage.setItem('isApLaunched', 'false');
-//   } else {
-//     setisAppLaunched(false);
-//   }
-// }, []);
-
 const Drawer = createDrawerNavigator();
 
 // should only be called by the DrawersRoutes()
@@ -155,7 +141,7 @@ function OffLinePages() {
 const MainPages = () => {
 	const { user } = useAuth();
 	return (
-		<Stack.Navigator initialRouteName="LoggedIn">
+		<Stack.Navigator>
 			{user ? (
 				<Stack.Screen name="LoggedIn" component={DrawersRoutes} options={{ headerShown: false }} />
 			) : (

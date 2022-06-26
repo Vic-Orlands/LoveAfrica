@@ -28,21 +28,19 @@ const Feeds = () => {
 	const navigation = useNavigation();
 	const [ profiles, setProfiles ] = useState([]);
 
-	useLayoutEffect(() => {
-		let unsub;
-		unsub = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
-			if (!snapshot.exists()) {
-				navigation.navigate('PhoneNumber');
-			}
-		});
-
-		return unsub;
-	}, []);
+	useLayoutEffect(
+		() =>
+			onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
+				if (!snapshot.exists()) {
+					navigation.navigate('UpdateModal');
+				}
+			}),
+		[]
+	);
 
 	useEffect(
 		() => {
 			let unsub;
-
 			const fetchUsersProfiles = async () => {
 				const passes = await getDocs(collection(db, 'users', user.uid, 'passes')).then((snapshot) =>
 					snapshot.docs.map((doc) => doc.id)
@@ -56,7 +54,8 @@ const Feeds = () => {
 				const swipedUserIds = swipes.length > 0 ? passes : [ 'check' ];
 
 				unsub = onSnapshot(
-					query(collection(db, 'users'), where('id', 'not-in', [ ...passedUserIds, ...swipedUserIds ])),
+					query(collection(db, 'users')),
+					// query(collection(db, 'users'), where('id', 'not-in', [ ...passedUserIds, ...swipedUserIds ])),
 					(snapshot) => {
 						setProfiles(
 							snapshot.docs.filter((doc) => doc.id !== user.uid).map((doc) => ({
@@ -267,10 +266,7 @@ const Feeds = () => {
 						</View>
 
 						<View>
-							<TouchableOpacity
-								style={[ { backgroundColor: '#E89528' }, tw`p-3 mb-3 rounded-full ` ]}
-								onPress={() => navigation.navigate('UpdateModal')}
-							>
+							<TouchableOpacity style={[ { backgroundColor: '#E89528' }, tw`p-3 mb-3 rounded-full ` ]}>
 								<AntDesign name="star" size={30} color="white" />
 							</TouchableOpacity>
 						</View>

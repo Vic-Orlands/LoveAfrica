@@ -1,20 +1,17 @@
 import React, { useState, useEffect, useMemo, useContext, createContext } from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
+WebBrowser.maybeCompleteAuthSession();
+const AuthContext = createContext({});
 
 import { signOut } from 'firebase/auth';
 import { app, auth } from '../../firebase';
 app;
 
-const AuthContext = createContext({});
-WebBrowser.maybeCompleteAuthSession();
-
 export const AuthProvider = ({ children }) => {
-	const navigation = useNavigation();
 	const [ user, setUser ] = useState(null);
 	const [ loadingInitial, setLoadingInitial ] = useState(true);
-	const [ loading, setLoading ] = useState(false);
 
 	const [ request, response, promptAsync ] = Google.useAuthRequest({
 		androidClientId: '1024785618777-vb67kl0h6rbonm5oorj802sk28t8897m.apps.googleusercontent.com',
@@ -29,8 +26,6 @@ export const AuthProvider = ({ children }) => {
 			auth.onAuthStateChanged((user) => {
 				if (user) {
 					setUser(user);
-				} else {
-					setUser(null);
 				}
 				setLoadingInitial(null);
 			}),
@@ -39,8 +34,12 @@ export const AuthProvider = ({ children }) => {
 
 	// function to checkout user or sign user out
 	const handleSignOut = () => {
-		setLoading(true);
-		signOut(auth).catch((error) => console.error(error)).finally(() => setLoading(false));
+		signOut(auth)
+			.then(() => {
+				setUser(null);
+				AsyncStorage.clear();
+			})
+			.catch((error) => console.error(error));
 	};
 
 	// memoize the values
@@ -49,12 +48,10 @@ export const AuthProvider = ({ children }) => {
 			user,
 			request,
 			response,
-			loading,
-			setLoading,
 			promptAsync,
 			handleSignOut
 		}),
-		[ user, request, response, loading ]
+		[ user, request, response ]
 	);
 
 	return <AuthContext.Provider value={memoizedValue}>{!loadingInitial && children}</AuthContext.Provider>;

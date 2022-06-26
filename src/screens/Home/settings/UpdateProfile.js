@@ -1,25 +1,23 @@
 import React, { useState, useEffect, createRef } from 'react';
 import { View, TouchableOpacity, Text, TextInput, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from 'react-native-phone-number-input';
 import * as ImagePicker from 'expo-image-picker';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../../components/FooterImg';
 import tw from 'tailwind-react-native-classnames';
 
 // import react toastify module
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import Toast from 'react-native-toast-message';
-import { app, auth } from '../../../../firebase';
 import useAuth from '../../../auth/useAuth';
+import { db } from '../../../../firebase';
 
 const UpdateProfile = () => {
-	const navigation = useNavigation();
-    const route = useRoute();
-    
-	console.log(route);
-
+	const { user } = useAuth();
 	const phoneInput = createRef(null);
+	const navigation = useNavigation();
+
 	const [ bgColor, setColor ] = useState('');
 	const [ show, setShow ] = useState(false);
 	const [ mode, setMode ] = useState('date');
@@ -27,6 +25,7 @@ const UpdateProfile = () => {
 
 	const [ sex, setSex ] = useState();
 	const [ email, setEmail ] = useState('');
+	const [ info, setInfo ] = useState(false);
 	const [ name, setName ] = useState('');
 	const [ image, setImage ] = useState(null);
 	const [ password, setPassword ] = useState('');
@@ -34,6 +33,23 @@ const UpdateProfile = () => {
 	const [ interestedIn, setInterestedIn ] = useState('');
 	const [ phoneNumber, setPhoneNumber ] = useState('');
 	const [ confirmPassword, setConfirmPassword ] = useState('');
+
+	// set google user name and email
+	useEffect(
+		() => {
+			let unsub = true;
+
+			if (unsub) {
+				let name = user.displayName;
+				let email = user.email;
+				setEmail(email);
+				setName(name);
+			}
+
+			return () => (unsub = false);
+		},
+		[ user ]
+	);
 
 	// image function to get images from local device
 	const pickImage = async () => {
@@ -80,10 +96,35 @@ const UpdateProfile = () => {
 		setColor('#CC0000');
 	};
 
+	// check if passord matches
+	const checkPasswordmatch = () => {
+		if (password !== confirmPassword) {
+			setInfo(true);
+		} else {
+			setInfo(false);
+		}
+	};
+
 	//handle to update profile
-	const handleSignIn = async () => {
-		AsyncStorage.getItem('googleUser');
-		console.log();
+	const handleUpdateProfile = async () => {
+		setDoc(doc(db, 'users', user.uid), {
+			sex: sex,
+			dob: date,
+			name: name,
+			image: image,
+			password: password,
+			email_address: email,
+			interested_in: interestedIn,
+			phone_number: phoneNumber,
+			confirm_password: confirmPassword,
+			timestamp: serverTimestamp()
+		})
+			.then(() => {
+				navigation.navigate('Feeds');
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	// style the toast messages
@@ -175,7 +216,7 @@ const UpdateProfile = () => {
 							editable={false}
 							style={[
 								tw`w-80 px-3 py-4 rounded-xl text-center shadow`,
-								{ backgroundColor: '#F0E0E0', fontFamily: 'Light' }
+								{ backgroundColor: '#F0E0E0', fontFamily: 'Light', color: '#000' }
 							]}
 						/>
 
@@ -207,7 +248,10 @@ const UpdateProfile = () => {
 							returnKeyType="done"
 							autoComplete="password"
 							secureTextEntry={true}
+							onTextInput={checkPasswordmatch}
 						/>
+
+						{info ? <Text>Password does not match</Text> : null}
 
 						<Text style={tw`flex items-center mt-4`}>Full Name</Text>
 						<TextInput
@@ -348,7 +392,7 @@ const UpdateProfile = () => {
 
 					<View style={tw`flex items-center mt-14 mb-24`}>
 						<TouchableOpacity
-							onPress={handleSignIn}
+							onPress={handleUpdateProfile}
 							style={[
 								tw`flex justify-center items-center w-72 rounded-full py-3 `,
 								{ backgroundColor: '#CC0000' }
