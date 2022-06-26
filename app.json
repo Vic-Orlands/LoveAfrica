@@ -1,39 +1,47 @@
 {
-  "expo": {
-    "name": "LoveAfrica",
-    "slug": "LoveAfrica",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "ldpi": "./assets/splash.png",
-      "mdpi": "./assets/splash.png",
-      "hdpi": "./assets/splash.png",
-      "xhdpi": "./assets/splash.png",
-      "xxhdpi": "./assets/splash.png",
-      "xxxhdpi": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "LoveAfrica",
+		"slug": "LoveAfrica",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"scheme": "mycoolredirect",
+		"userInterfaceStyle": "light",
+		"splash": {
+			"image": "./assets/splash.png",
+			"ldpi": "./assets/splash.png",
+			"mdpi": "./assets/splash.png",
+			"hdpi": "./assets/splash.png",
+			"xhdpi": "./assets/splash.png",
+			"xxhdpi": "./assets/splash.png",
+			"xxxhdpi": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": [ "**/*" ],
+		"ios": {
+			"supportsTablet": true,
+			"googleServicesFile": "./GoogleService-Info.plist",
+			"bundleIdentifier": "com.vicorlands.LoveAfrica",
+			"config": {
+				"googleSignIn": {
+					"reservedClientId": "com.googleusercontent.apps.1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8"
+				}
+			}
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/adaptive-icon.png",
+				"backgroundColor": "#FFFFFF"
+			},
+			"googleServicesFile": "./google-services.json",
+			"package": "com.vicorlands.LoveAfrica"
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		}
+	}
 }

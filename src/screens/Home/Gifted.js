@@ -8,7 +8,7 @@ export default function Gifted() {
     setMessages([
       {
         _id: 1,
-        text: 'Hello developebr',
+        text: 'Hello developer',
         createdAt: new Date(),
         user: {
           _id: 2,
