@@ -13,15 +13,31 @@ import {
 	TouchableWithoutFeedback
 } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import TopNav from '../../components/TopNav';
 import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons';
 import Cards from '../../components/Cards';
 import splash from '../../../assets/splash.png';
 
 // create a component
-const ProfileInfo = () => {
+const ProfileInfo = ({ route }) => {
+	const { params } = useRoute();
 	const navigation = useNavigation();
+
+	let user = Object.keys(route);
+	// console.log(route.params.user.dob)
+
+	//calculate age from returned dob
+	const calculateAge = (dateString) => {
+		var today = new Date();
+		var birthDate = new Date(dateString);
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		return age;
+	};
 
 	const ImgCarousel = ({ fileName }) => {
 		return (
@@ -45,10 +61,15 @@ const ProfileInfo = () => {
 					{/* User Info Header */}
 					<View style={tw`flex items-center justify-center`}>
 						<View>
-							<Image source={splash} style={tw`h-20 w-20 rounded-full border `} />
+							<Image
+								source={{ uri: route.params.user.image }}
+								style={tw`h-20 w-20 rounded-full border `}
+							/>
 						</View>
 						<View style={tw`pt-1 `}>
-							<Text style={[ { fontFamily: 'Bold' }, tw`text-xl  ` ]}>Ozozemena bright, Age</Text>
+							<Text style={[ { fontFamily: 'Bold' }, tw`text-xl  ` ]}>
+								{route.params.user.name}, {calculateAge(route.params.user.dob)}{' '}
+							</Text>
 							<Text
 								style={[
 									{ fontFamily: 'Light' },
@@ -103,9 +124,7 @@ const ProfileInfo = () => {
 
 						<View style={tw` `}>
 							<Text style={[ { fontFamily: 'Regular', lineHeight: 23 }, tw` pt-3` ]}>
-								About Me About MeAbout Me About Me About MeAbout Me About Me About MeAbout Me About Me
-								About MeAbout Me About Me About MeAbout Me About Me About MeAbout Me About Me About
-								MeAbout Me About Me About MeAbout Me
+								{route.params.user.email_address}
 							</Text>
 						</View>
 					</View>
@@ -119,27 +138,21 @@ const ProfileInfo = () => {
 						</View>
 
 						<View style={tw` w-full `}>
-							<View style={tw`w-full  items-start justify-start`}>
-								<Text style={[ { lineHeight: 40 }, tw`text-center  p-2` ]}>
+							<View style={tw`w-full flex-row items-start justify-start flex-wrap`}>
+								{route.params.user.hobbies.map((hobb) => (
 									<Pressable
-										style={tw`border mb-3 border-gray-300 mx-2 p-2  flex justify-center  rounded-full`}
+										style={tw`border mt-2 border-gray-300 p-2 mx-1 flex justify-center  rounded-full`}
 									>
-										<Text style={[ { fontFamily: 'Regular' }, tw`` ]}>Fishing</Text>
+										<Text style={[ { fontFamily: 'Regular' }, tw`` ]}>{hobb}</Text>
 									</Pressable>
-
-									<Pressable
-										style={tw`border border-gray-300 mx-2 p-2  flex justify-center  rounded-full`}
-									>
-										<Text style={[ { fontFamily: 'Regular' }, tw`` ]}>Surfing</Text>
-									</Pressable>
-								</Text>
+								))}
 							</View>
 						</View>
 					</View>
 
 					{/* Interest */}
 					<View style={tw`px-2 pb-8 w-full `}>
-						<Cards title="Interested In" slug="Women" />
+						<Cards title="Interested In" slug={route.params.user.interested_in} />
 					</View>
 
 					{/* Socials. This should be removed later */}
@@ -158,10 +171,7 @@ const ProfileInfo = () => {
 						<View>
 							<Text style={[ { fontFamily: 'Bold' }, tw` text-xl  text-red-600  ` ]}>Say Hello.</Text>
 						</View>
-						<View style={tw` w-full `}>
-							<Cards // action={}
-							title="Chat Starter" />
-						</View>
+						<View style={tw` w-full`}>{/* <Cards title="Chat Starter" /> */}</View>
 					</View>
 
 					{/* Media Images */}
@@ -171,7 +181,7 @@ const ProfileInfo = () => {
 						</View>
 						<View style={tw` w-full `}>
 							<ScrollView horizontal disableIntervalMomentum={true}>
-								<ImgCarousel fileName={splash} />
+								<ImgCarousel fileName={{ uri: route.params.user.image }} />
 							</ScrollView>
 						</View>
 					</View>

@@ -54,8 +54,8 @@ const Feeds = () => {
 				const swipedUserIds = swipes.length > 0 ? passes : [ 'check' ];
 
 				unsub = onSnapshot(
-					query(collection(db, 'users')),
-					// query(collection(db, 'users'), where('id', 'not-in', [ ...passedUserIds, ...swipedUserIds ])),
+					// query(collection(db, 'users')),
+					query(collection(db, 'users'), where('id', 'not-in', [ ...passedUserIds, ...swipedUserIds ])),
 					(snapshot) => {
 						setProfiles(
 							snapshot.docs.filter((doc) => doc.id !== user.uid).map((doc) => ({
@@ -237,7 +237,9 @@ const Feeds = () => {
 											</Text>
 										</View>
 										<View style={tw`flex items-center justify-center  pl-2`}>
-											<Pressable onPress={() => navigation.navigate('ProfileInfo')}>
+											<Pressable
+												onPress={() => navigation.navigate('ProfileInfo', { user: card })}
+											>
 												<Entypo name="info-with-circle" size={20} color="#cc0000" />
 											</Pressable>
 										</View>
