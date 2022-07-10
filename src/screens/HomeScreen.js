@@ -85,6 +85,9 @@ const HomeScreen = () => {
 		promptAsync()
 			.then((res) => {
 				if (res.type === 'success') {
+					//set user logged in to true
+					AsyncStorage.setItem('loggedIn', JSON.stringify(res));
+
 					const { idToken, accessToken } = res.authentication;
 					const auth = getAuth();
 					const credential = GoogleAuthProvider.credential(idToken, accessToken);
@@ -179,7 +182,7 @@ const HomeScreen = () => {
 						<View style={tw`mt-12`} />
 						<Pressable onPress={() => navigation.navigate('RecoverScreen')}>
 							<Text style={[ { fontFamily: 'Bold' }, tw`text-center text-white text-xl` ]}>
-								Can't Login?
+								Forgot Password?
 							</Text>
 						</Pressable>
 

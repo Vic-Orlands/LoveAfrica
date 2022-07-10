@@ -41,7 +41,6 @@ import MyDrawers from './src/components/MyDrawers';
 import MsgHeader from './src/components/MsgHeader';
 import useAuth from './src/auth/useAuth';
 import Drawers from './src/Drawers';
-import { Text } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -140,6 +139,7 @@ function OffLinePages() {
 
 const MainPages = () => {
 	const { user } = useAuth();
+	
 	return (
 		<Stack.Navigator>
 			{user ? (

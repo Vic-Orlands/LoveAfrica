@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, Imag
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import tw from 'tailwind-react-native-classnames';
+import Toast from 'react-native-toast-message';
 import Header from '../../components/Header';
 import Swiper from 'react-native-deck-swiper';
 import {
@@ -54,7 +55,6 @@ const Feeds = () => {
 				const swipedUserIds = swipes.length > 0 ? passes : [ 'check' ];
 
 				unsub = onSnapshot(
-					// query(collection(db, 'users')),
 					query(collection(db, 'users'), where('id', 'not-in', [ ...passedUserIds, ...swipedUserIds ])),
 					(snapshot) => {
 						setProfiles(
@@ -78,6 +78,41 @@ const Feeds = () => {
 		const userSwiped = profiles[cardIndex];
 		console.log(`You swiped NOPE on ${userSwiped.name}`);
 		setDoc(doc(db, 'users', user.uid, 'passes', userSwiped.id), userSwiped);
+	};
+
+	// style the toast messages
+	const toastConfig = {
+		success: (internalState) => (
+			<View
+				style={{
+					height: 65,
+					width: '90%',
+					marginTop: -15,
+					zIndex: 2,
+					backgroundColor: 'green',
+					flex: 1,
+					alignItems: 'center',
+					justifyContent: 'center',
+					borderWidth: 1,
+					borderColor: '#ccc',
+					borderRadius: 15
+				}}
+			>
+				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+			</View>
+		)
+	};
+
+	const swipeBottom = async (cardIndex) => {
+		if (!profiles[cardIndex]) return;
+		const userSwiped = profiles[cardIndex];
+
+		Toast.show({
+			type: 'success',
+			position: 'top',
+			text1: `You liked ${userSwiped.name} ☺️`
+		});
+		setDoc(doc(db, 'users', user.uid, 'likes', userSwiped.id), userSwiped);
 	};
 
 	const swipeRight = async (cardIndex) => {
@@ -160,6 +195,13 @@ const Feeds = () => {
 
 	return (
 		<SafeAreaView style={[ styles.container, tw`` ]}>
+			<Toast
+				config={toastConfig}
+				innerRef={(res) => {
+					Toast.setRef(res);
+				}}
+			/>
+
 			<View style={tw`mt-3   h-full`}>
 				{/* Header */}
 				<Header activeHome={tw`underline border-b-2 border-red-700  pb-1`} />
@@ -171,24 +213,25 @@ const Feeds = () => {
 						ref={swipeRef}
 						containerStyle={{ backgroundColor: 'transparent' }}
 						stackSize={3}
+						cardIndex={0}
 						onSwipedLeft={(cardIndex) => {
-							console.log('i dont like');
 							swipeLeft(cardIndex);
 						}}
 						onSwipedRight={(cardIndex) => {
-							console.log(`i like`);
 							swipeRight(cardIndex);
 						}}
-						cardIndex={0}
+						onSwipedBottom={(cardIndex) => {
+							swipeBottom(cardIndex);
+						}}
 						overlayLabels={{
 							left: {
 								element: <Nope />,
 								title: 'NOPE',
 								style: {
 									label: {
-										backgroundColor: 'white',
+										backgroundColor: '#cc0000',
 										borderColor: '#cc0000',
-										color: '#cc0000',
+										color: '#fff',
 										borderWidth: 1
 									},
 									wrapper: {
@@ -253,7 +296,6 @@ const Feeds = () => {
 							)}
 					/>
 				</View>
-				{/* Cards */}
 
 				{/* Alt Card */}
 				<View style={tw`bottom-0 pb-20 absolute w-full `}>
@@ -268,7 +310,10 @@ const Feeds = () => {
 						</View>
 
 						<View>
-							<TouchableOpacity style={[ { backgroundColor: '#E89528' }, tw`p-3 mb-3 rounded-full ` ]}>
+							<TouchableOpacity
+								onPress={() => swipeRef.current.swipeBottom()}
+								style={[ { backgroundColor: '#E89528' }, tw`p-3 mb-3 rounded-full ` ]}
+							>
 								<AntDesign name="star" size={30} color="white" />
 							</TouchableOpacity>
 						</View>
@@ -283,7 +328,6 @@ const Feeds = () => {
 						</View>
 					</View>
 				</View>
-				{/* Alt Card */}
 			</View>
 		</SafeAreaView>
 	);

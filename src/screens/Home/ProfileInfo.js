@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React from 'react';
 import {
 	View,
 	Text,
@@ -9,23 +9,18 @@ import {
 	StatusBar,
 	Image,
 	TouchableOpacity,
-	Pressable,
-	TouchableWithoutFeedback
+	Pressable
 } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
+import { AntDesign, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../components/TopNav';
-import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons';
 import Cards from '../../components/Cards';
-import splash from '../../../assets/splash.png';
 
 // create a component
 const ProfileInfo = ({ route }) => {
 	const { params } = useRoute();
 	const navigation = useNavigation();
-
-	let user = Object.keys(route);
-	// console.log(route.params.user.dob)
 
 	//calculate age from returned dob
 	const calculateAge = (dateString) => {
@@ -50,9 +45,7 @@ const ProfileInfo = ({ route }) => {
 	return (
 		<SafeAreaView style={[ styles.container, tw`` ]}>
 			{/* Top Navigation */}
-			<TopNav
-			// OpenMenu={<AntDesign name="menu-unfold" size={26} color="#000000" />}
-			/>
+			<TopNav />
 
 			<ScrollView style={tw`h-full `}>
 				<View style={tw`flex-1 px-4`}>
@@ -85,30 +78,21 @@ const ProfileInfo = ({ route }) => {
 					<View style={tw` pb-8 w-full `}>
 						<View style={tw`flex flex-row justify-evenly mx-5 items-center bottom-0  pt-4 `}>
 							<View style={[ tw`flex justify-center items-center ` ]}>
-								<TouchableOpacity
-									// onPress={}
-									style={[ tw`  rounded-full ` ]}
-								>
+								<TouchableOpacity style={[ tw`  rounded-full ` ]}>
 									<AntDesign name="message1" size={32} color="#cc0000" />
 								</TouchableOpacity>
 								<Text style={[ { fontFamily: 'Regular' }, tw`text-xs text-center` ]}>Message</Text>
 							</View>
 
 							<View style={[ tw`flex justify-center items-center ` ]}>
-								<TouchableOpacity
-									// onPress={}
-									style={[ tw`  rounded-full ` ]}
-								>
+								<TouchableOpacity style={[ tw`  rounded-full ` ]}>
 									<MaterialIcons name="call" size={32} color="#cc0000" />
 								</TouchableOpacity>
 								<Text style={[ { fontFamily: 'Regular' }, tw`text-xs text-center` ]}>Call</Text>
 							</View>
 
 							<View style={[ tw`flex justify-center items-center ` ]}>
-								<TouchableOpacity
-									// onPress={}
-									style={[ tw`  rounded-full ` ]}
-								>
+								<TouchableOpacity style={[ tw`  rounded-full ` ]}>
 									<Ionicons name="videocam" size={32} color="#cc0000" />
 								</TouchableOpacity>
 								<Text style={[ { fontFamily: 'Regular' }, tw`text-xs text-center` ]}>Video Call</Text>
@@ -171,7 +155,7 @@ const ProfileInfo = ({ route }) => {
 						<View>
 							<Text style={[ { fontFamily: 'Bold' }, tw` text-xl  text-red-600  ` ]}>Say Hello.</Text>
 						</View>
-						<View style={tw` w-full`}>{/* <Cards title="Chat Starter" /> */}</View>
+						{/* <View style={tw` w-full`}><Cards title="Chat Starter" /></View> */}
 					</View>
 
 					{/* Media Images */}
@@ -185,11 +169,6 @@ const ProfileInfo = ({ route }) => {
 							</ScrollView>
 						</View>
 					</View>
-
-					{/* Block And Report action. The report should be suspended for now */}
-					{/* <View style={tw`px-2 pb-8 w-full `}>
-                        <Cards title='Report user' slug='Women' />
-                    </View> */}
 
 					<View style={tw`px-2 pb-8 w-full `}>
 						<Cards title="Block User" yes={<FontAwesome name="toggle-off" size={28} color="#cc0000" />} />

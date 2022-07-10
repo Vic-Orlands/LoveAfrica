@@ -1,18 +1,7 @@
 //import liraries
-import React, { Component } from 'react';
-import {
-	View,
-	Text,
-	Image,
-	SafeAreaView,
-	StyleSheet,
-	ScrollView,
-	FlatList,
-	StatusBar,
-	TouchableOpacity
-} from 'react-native';
+import React from 'react';
+import { View, Text, Modal, SafeAreaView, StyleSheet, FlatList, StatusBar, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
-import { useNavigation } from '@react-navigation/native';
 import MsgHeader from '../../components/MsgHeader';
 
 const msgData = [
@@ -511,9 +500,8 @@ const msgData = [
 ];
 
 // create a component
-const ChatStarter = () => {
-	const navigation = useNavigation();
-	Loading = () => {
+const ChatStarter = ({ visible, onCloseAndSend, onCloseWithoutSending }) => {
+	const Loading = () => {
 		return <Text style={[ { fontFamily: 'Regular' } ]}>Loading...</Text>;
 	};
 
@@ -525,11 +513,10 @@ const ChatStarter = () => {
 					keyExtractor={(item) => item.id}
 					refreshing={false}
 					renderItem={({ item }) => (
-						<View style={tw`w-full flex flex-row bg-gray-200  rounded-lg mt-3 `}>
+						<View style={tw`w-full flex flex-row bg-gray-200 rounded-lg mt-3 `}>
 							<TouchableOpacity
-								style={tw`p-4 flex flex-row  w-full`}
-								// onPress={() => navigation.navigate("Gifted")}
-								onPress={() => navigation.navigate('Chat')}
+								style={tw`p-4 flex flex-row w-full`}
+								onPress={() => onCloseAndSend(item.text)}
 							>
 								<Text
 									style={[
@@ -548,27 +535,33 @@ const ChatStarter = () => {
 	};
 
 	return (
-		<SafeAreaView style={[ styles.container, tw`` ]}>
-			<View style={tw`mt-2 flex-1 `}>
-				<MsgHeader />
-				<View style={tw`px-6 w-full`}>
-					<View>
-						<Text style={[ { fontFamily: 'Bold' }, tw` text-2xl pt-4` ]}>Chat Starter</Text>
-					</View>
-					<View style={tw`pb-4`}>
-						<View style={tw`w-full mb-24`}>
-							<FlatList
-								data={msgData}
-								keyExtractor={(item) => item.id}
-								ListFooterComponent={<Starter />}
-								style={tw` mb-12`}
-								refreshing={false}
-								onRefresh={Loading}
-							/>
+		<SafeAreaView style={[ styles.container ]}>
+			<Modal animationType="slide" visible={visible} backdropTransitionOutTiming={0}>
+				<View style={tw`mt-2 flex-1`}>
+					<MsgHeader />
+					<View style={tw`px-6 w-full`}>
+						<View style={tw`flex flex-row justify-between pb-2`}>
+							<Text style={[ { fontFamily: 'Bold' }, tw` text-2xl pt-4` ]}>Chat Starter</Text>
+
+							<TouchableOpacity onPress={() => onCloseWithoutSending()}>
+								<Text style={[ { fontFamily: 'Bold', color: 'red' }, tw` text-2xl pt-4` ]}>Close</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={tw`pb-4`}>
+							<View style={tw`w-full mb-24`}>
+								<FlatList
+									data={msgData}
+									refreshing={false}
+									style={tw` mb-12`}
+									onRefresh={Loading}
+									keyExtractor={(item) => item.id}
+									ListFooterComponent={<Starter />}
+								/>
+							</View>
 						</View>
 					</View>
 				</View>
-			</View>
+			</Modal>
 		</SafeAreaView>
 	);
 };

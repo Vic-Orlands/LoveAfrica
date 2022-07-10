@@ -13,7 +13,7 @@ const Header = ({ activeHome, activeLikes }) => {
 	const navigation = useNavigation();
 
 	return (
-		<View style={[ styles.flex, tw`px-6 flex-row items-center pt-3` ]}>
+		<View style={[ styles.flex, tw`px-6 flex-row items-center pt-3`, { zIndex: -3 } ]}>
 			<TouchableOpacity onPress={() => navigation.openDrawer()}>
 				<AntDesign name="menu-unfold" size={26} color="#000000" />
 			</TouchableOpacity>
