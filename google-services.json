@@ -1,37 +1,45 @@
 {
   "project_info": {
-    "project_number": "1024785618777",
-    "project_id": "loveafrica",
-    "storage_bucket": "loveafrica.appspot.com"
+    "project_number": "911987219804",
+    "project_id": "loveafrica-46a25",
+    "storage_bucket": "loveafrica-46a25.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024785618777:android:e41958cf23b1be91635e48",
+        "mobilesdk_app_id": "1:911987219804:android:104ab6ce797f81e30ef599",
         "android_client_info": {
           "package_name": "com.vicorlands.LoveAfrica"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1024785618777-bshccmhmvh5gpc3s3p0hep2th144egc1.apps.googleusercontent.com",
+          "client_id": "911987219804-aeoqfrbi2v4ulerh8nebeg5ka418baif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vicorlands.LoveAfrica",
+            "certificate_hash": "865078d9970367c202a43129797d76ad13eba61a"
+          }
+        },
+        {
+          "client_id": "911987219804-dsovtrvgq7beku6pom08t0lsdg0kq4gn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC69GbnwgGfx5GEIcFZuNh2oIXW28W7O-o"
+          "current_key": "AIzaSyBbPkTsMu-LmeyDZ0MM9I9F6PiKyLx2rxE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1024785618777-bshccmhmvh5gpc3s3p0hep2th144egc1.apps.googleusercontent.com",
+              "client_id": "911987219804-dsovtrvgq7beku6pom08t0lsdg0kq4gn.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8.apps.googleusercontent.com",
+              "client_id": "911987219804-cv2td9j08n82mc0dd8fske16h0d36tvm.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.vicorlands.LoveAfrica"

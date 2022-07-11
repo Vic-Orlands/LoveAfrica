@@ -4,13 +4,13 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyDVoJe7LetSpCn9MAVkFVRVjGTZezeo6zM',
-	authDomain: 'loveafrica.firebaseapp.com',
-	projectId: 'loveafrica',
-	storageBucket: 'loveafrica.appspot.com',
-	messagingSenderId: '1024785618777',
-	appId: '1:1024785618777:web:0975ce0772f419d3635e48',
-	measurementId: 'G-GX97VW9SMJ'
+	apiKey: 'AIzaSyBiHM9AUVgZA4kw8g-sox5mNDMyX5nxScI',
+	authDomain: 'loveafrica-46a25.firebaseapp.com',
+	projectId: 'loveafrica-46a25',
+	storageBucket: 'loveafrica-46a25.appspot.com',
+	messagingSenderId: '911987219804',
+	appId: '1:911987219804:web:8e668d8a37f5db590ef599',
+	measurementId: 'G-B2PVV9RSBD'
 };
 
 // Initialize Firebase

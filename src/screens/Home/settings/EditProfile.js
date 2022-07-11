@@ -7,14 +7,16 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	StatusBar,
+	Pressable,
 	ImageBackground,
 	SafeAreaView
 } from 'react-native';
 import { Ionicons, AntDesign, FontAwesome, FontAwesome5, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
-import ActionButton from '../../../components/ActionButton';
 import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../../components/FooterImg';
 import Slider from '@react-native-community/slider';
+import * as ImagePicker from 'expo-image-picker';
+import { ImageBrowser } from 'expo-image-picker-multiple';
 import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../../components/TopNav';
 import myImgs from '../../../../assets/splash.png';
@@ -25,6 +27,20 @@ const EditProfile = () => {
 	const navigation = useNavigation();
 	const [ Age, setAge ] = useState(30);
 	const [ Miles, setMiles ] = useState(0);
+	const [ image, setImage ] = useState(null);
+
+	//select images
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [ 4, 3 ],
+			quality: 1
+		});
+		if (!result.cancelled) {
+			setImage(result.uri);
+		}
+	};
 
 	const Photo = ({ ImageHere, icon }) => {
 		return (
@@ -64,10 +80,24 @@ const EditProfile = () => {
 					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
 				</View>
 
-				<ActionButton
-					InfoText="Add to Gallery"
-					InfoIcon={<AntDesign name="plussquare" size={24} color="white" />}
-				/>
+				<View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
+					<TouchableOpacity
+						style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`}
+						onPress={pickImage}
+					>
+						<AntDesign name="plussquare" size={24} color="white" />
+						<Text
+							style={[
+								{ fontFamily: 'Bold' },
+								tw` ml-4 text-center flex justify-center  text-white  text-base`
+							]}
+						>
+							Add to Gallery
+						</Text>
+					</TouchableOpacity>
+				</View>
+
+				{/* <ImageBrowser max={4} onChange={(num, onSubmit) => {}} callback={(callback) => {}} /> */}
 			</React.Fragment>
 		);
 	};
@@ -115,10 +145,7 @@ const EditProfile = () => {
 			<React.Fragment>
 				<View style={tw`w-full mt-8`}>
 					<Text style={[ { fontFamily: 'Bold' }, tw` text-xl` ]}>My Preferences (Show Me).</Text>
-					<Cards
-						title="Men"
-						yes={<Feather name="toggle-left" size={28} color="#cc0000" />}
-					/>
+					<Cards title="Men" yes={<Feather name="toggle-left" size={28} color="#cc0000" />} />
 					<Cards
 						title=" Nigeria"
 						slug={<Feather name="flag" size={20} color="#cc0000" />}

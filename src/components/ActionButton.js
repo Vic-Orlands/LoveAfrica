@@ -9,6 +9,7 @@ const ActionButton = ({ InfoText, InfoIcon }) => {
 	const logOut = () => {
 		handleSignOut();
 	};
+	
 	return (
 		<View style={tw`w-full mt-4 flex`}>
 			<View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>

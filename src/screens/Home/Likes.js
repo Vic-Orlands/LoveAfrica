@@ -163,29 +163,43 @@ const Likes = () => {
 				<View style={tw`mt-5`} />
 				{likes ? (
 					<View style={tw`px-6 mb-6 w-full`}>
-						<View style={tw`w-full flex flex-row  justify-evenly items-center`}>
-							<FlatList
-								data={likedUsers}
-								renderItem={Liked}
-								extraData={likedUsers}
-								onRefresh={<p>Loading...</p>}
-								refreshing={likedUsers.length > 0 ? false : true}
-								keyExtractor={(item) => item.id}
-							/>
-						</View>
+						{likedUsers.length > 0 ? (
+							<View style={tw`w-full flex flex-row  justify-evenly items-center`}>
+								<FlatList
+									data={likedUsers}
+									renderItem={Liked}
+									extraData={likedUsers}
+									onRefresh={<p>Loading...</p>}
+									refreshing={likedUsers.length > 0 ? false : true}
+									keyExtractor={(item) => item.id}
+								/>
+							</View>
+						) : (
+							<View style={tw`w-full flex flex-row  justify-evenly items-center`}>
+								<Text style={[ { fontFamily: 'Bold', fontSize: 20 }, tw` text-black p-2` ]}>
+									You haven't liked anybody yet
+								</Text>
+							</View>
+						)}
 					</View>
 				) : (
 					<View style={tw`px-6 mb-6 w-full`}>
-						<View style={tw`w-full flex flex-row justify-evenly items-center`}>
-							<FlatList
-								data={matchedUsers}
-								extraData={matchedUsers}
-								onRefresh={<p>Loading...</p>}
-								keyExtractor={(item) => item.id}
-								refreshing={matchedUsers.length > 0 ? false : true}
-								renderItem={({ item }) => <Liked details={item} user={user} />}
-							/>
-						</View>
+						{matchedUsers.length > 0 ? (
+							<View style={tw`w-full flex flex-row justify-evenly items-center`}>
+								<FlatList
+									data={matchedUsers}
+									extraData={matchedUsers}
+									onRefresh={<p>Loading...</p>}
+									keyExtractor={(item) => item.id}
+									refreshing={matchedUsers.length > 0 ? false : true}
+									renderItem={({ item }) => <Liked details={item} user={user} />}
+								/>
+							</View>
+						) : (
+							<Text style={[ { fontFamily: 'Bold', fontSize: 20 }, tw` text-black p-2` ]}>
+								You haven't matched with anybody yet
+							</Text>
+						)}
 					</View>
 				)}
 			</View>

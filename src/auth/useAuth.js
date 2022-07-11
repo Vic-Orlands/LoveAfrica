@@ -14,10 +14,9 @@ export const AuthProvider = ({ children }) => {
 	const [ loadingInitial, setLoadingInitial ] = useState(true);
 
 	const [ request, response, promptAsync ] = Google.useAuthRequest({
-		androidClientId: '1024785618777-vb67kl0h6rbonm5oorj802sk28t8897m.apps.googleusercontent.com',
-		iosClientId: '1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8.apps.googleusercontent.com',
-		expoClientId: '1024785618777-bshccmhmvh5gpc3s3p0hep2th144egc1.apps.googleusercontent.com',
-		webClientId: '1024785618777-gindhl44j3drvtt2crn6mht2fknq4dc6.apps.googleusercontent.com'
+		androidClientId: '911987219804-aeoqfrbi2v4ulerh8nebeg5ka418baif.apps.googleusercontent.com',
+		iosClientId: '911987219804-cv2td9j08n82mc0dd8fske16h0d36tvm.apps.googleusercontent.com',
+		webClientId: '911987219804-dsovtrvgq7beku6pom08t0lsdg0kq4gn.apps.googleusercontent.com'
 	});
 
 	// check if user is logged in and keep user logged in

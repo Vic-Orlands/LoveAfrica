@@ -1,15 +1,19 @@
 //import liraries
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import FooterImg from '../../components/FooterImg';
 import tw from 'tailwind-react-native-classnames';
 import { Ionicons } from '@expo/vector-icons';
-import FooterImg from '../../components/FooterImg';
 
 const CheckMark = () => {
 	return <Ionicons name="checkmark" size={150} color="black" />;
 };
+
 // create a component
 const EmailSent = () => {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<View style={tw`flex-1 items-center p-4`}>
@@ -20,19 +24,25 @@ const EmailSent = () => {
 					<View style={tw`mt-2`} />
 					<View style={tw`flex items-center`}>
 						<CheckMark />
-						<Text style={[ tw`pl-3 flex text-center w-72 pt-2 pb-4w`, { lineHeight: 20 } ]}>
+						<Text style={[ tw`pl-3 flex text-center w-72 pt-2 pb-4`, { lineHeight: 20 } ]}>
 							You will receive an email to continue your account recovery.
 						</Text>
+						<TouchableOpacity
+							onPress={() => navigation.navigate('Login')}
+							style={[
+								tw`flex justify-center items-center w-72 rounded-full py-4 `,
+								{ backgroundColor: '#CC0000' }
+							]}
+						>
+							<Text style={tw`text-white text-center font-bold text-base flex items-center`}>
+								Go to Sign in
+							</Text>
+						</TouchableOpacity>
 						<View style={tw`pt-24`} />
 						<Text style={tw`text-xl`}>Didnt’t receive any email ?</Text>
 
-						<View style={tw`pt-12`} />
-						<Pressable>
-							<Text style={[ tw`text-base font-bold`, { color: '#CC0000' } ]}>Use a Phone Number</Text>
-						</Pressable>
-						<Text style={tw`pt-4 text-xl font-bold`}>Or</Text>
 						<View style={tw`pt-4`} />
-						<Pressable>
+						<Pressable onPress={() => navigation.navigate('EmailRecover')}>
 							<Text style={[ tw`text-base font-bold`, { color: '#CC0000' } ]}>
 								Try Again with different email.
 							</Text>

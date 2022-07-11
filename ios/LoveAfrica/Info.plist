@@ -25,7 +25,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>mycoolredirect</string>
           <string>com.vicorlands.LoveAfrica</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8</string>
         </array>
       </dict>
     </array>
@@ -46,6 +53,12 @@
         </dict>
       </dict>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Allow $(PRODUCT_NAME) to access your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Allow $(PRODUCT_NAME) to access your microphone</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow $(PRODUCT_NAME) to access your photos</string>
     <key>NSUserTrackingUsageDescription</key>
     <string>This identifier will be used to deliver personalized ads to you.</string>
     <key>SKAdNetworkItems</key>

@@ -1,4 +1,3 @@
-//import liraries
 import React, { useState, useEffect } from 'react';
 import {
 	View,
@@ -112,7 +111,7 @@ const Chat = () => {
 	};
 
 	return (
-		<SafeAreaView style={[ styles.container]}>
+		<SafeAreaView style={[ styles.container ]}>
 			<View style={tw`w-full h-full`}>
 				{/* Header */}
 				<View style={[ styles.flex, tw` bg-white shadow py-5 mb-2` ]}>
@@ -129,7 +128,7 @@ const Chat = () => {
 									<Image source={img} style={tw`h-8 w-8 rounded-full`} />
 								</View>
 								<View style={tw`pl-2  flex justify-center`}>
-									<Text style={[ { fontFamily: 'Bold' }, tw`text-base`]}>
+									<Text style={[ { fontFamily: 'Bold' }, tw`text-base` ]}>
 										{getMatchedUserInfo(matchedDetails.users, user.uid).name}
 									</Text>
 									<Text style={[ { fontFamily: 'Regular' }, tw`text-xs` ]}>Online</Text>
@@ -203,7 +202,7 @@ const Chat = () => {
 									</TouchableOpacity>
 								</View>
 							) : (
-								<View style={[ tw` flex-row`, { width: '40%' }]}>
+								<View style={[ tw` flex-row`, { width: '40%' } ]}>
 									<Icons />
 								</View>
 							)}

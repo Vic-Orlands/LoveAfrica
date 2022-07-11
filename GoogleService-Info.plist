@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8.apps.googleusercontent.com</string>
+	<string>911987219804-cv2td9j08n82mc0dd8fske16h0d36tvm.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1024785618777-slsotm39cnul0i0frn0fqhbq8jjrr7m8</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>1024785618777-vb67kl0h6rbonm5oorj802sk28t8897m.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.911987219804-cv2td9j08n82mc0dd8fske16h0d36tvm</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC7GmBgI4-ZqszKrLMVy3i-0K3VowfnSF4</string>
+	<string>AIzaSyAsaYQD9Q8Wc45sfOXmrtyPcionUlz-33g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1024785618777</string>
+	<string>911987219804</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.vicorlands.LoveAfrica</string>
 	<key>PROJECT_ID</key>
-	<string>loveafrica</string>
+	<string>loveafrica-46a25</string>
 	<key>STORAGE_BUCKET</key>
-	<string>loveafrica.appspot.com</string>
+	<string>loveafrica-46a25.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1024785618777:ios:efd8778b35335616635e48</string>
+	<string>1:911987219804:ios:630ac39b4f3194360ef599</string>
 </dict>
 </plist>
