@@ -51,7 +51,9 @@ const Messages = () => {
 						</View>
 					) : (
 						<View style={tw`pb-4 w-full mb-24`}>
-							<Text>No matches at the moment</Text>
+							<Text style={[ { fontFamily: 'Bold', fontSize: 18 }, tw` text-black pt-6` ]}>
+								You don't have any messages yet
+							</Text>
 						</View>
 					)}
 				</View>

@@ -5,7 +5,6 @@ import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import {
 	Entypo,
-	EvilIcons,
 	MaterialCommunityIcons,
 	SimpleLineIcons,
 	MaterialIcons,
@@ -81,13 +80,13 @@ const MyDrawers = (props) => {
 						>
 							<Image
 								source={{ uri: profile[0]?.image }}
-								style={[ { height: 80, width: 80, borderRadius: 40 }, tw`border border-2 p-6 ` ]}
+								style={[ { height: 80, width: 80, borderRadius: 40 }, tw`border border-2 p-6`]}
 							/>
 						</View>
 					</View>
 					<View style={tw`flex-row mt-1`}>
-						<Entypo name="info-with-circle" size={20} color="#cc0000" />
-						<Text style={[ { fontFamily: 'Bold' }, tw`pl-2 text-base` ]}>
+						<Entypo name="info-with-circle" size={20} color="#cc0000" onPress={() => navigation.navigate('ProfileInfo', { user: profile[0] })}  />
+						<Text style={[ { fontFamily: 'Bold' }, tw`pl-2 text-base`]}>
 							{profile[0]?.name}, {calculateAge(profile[0]?.dob)}
 						</Text>
 					</View>

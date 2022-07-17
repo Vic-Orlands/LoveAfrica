@@ -12,16 +12,12 @@ import {
 	Pressable
 } from 'react-native';
 import { AntDesign, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../components/TopNav';
 import Cards from '../../components/Cards';
 
 // create a component
 const ProfileInfo = ({ route }) => {
-	const { params } = useRoute();
-	const navigation = useNavigation();
-
 	//calculate age from returned dob
 	const calculateAge = (dateString) => {
 		var today = new Date();
@@ -31,7 +27,7 @@ const ProfileInfo = ({ route }) => {
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
 			age--;
 		}
-		return age;
+		return age
 	};
 
 	const ImgCarousel = ({ fileName }) => {

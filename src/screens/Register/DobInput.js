@@ -1,23 +1,43 @@
 //import liraries
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import tw from 'tailwind-react-native-classnames';
-import FooterImg from '../../components/FooterImg';
+import React, { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import med from '../../../assets/splash.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import FooterImg from '../../components/FooterImg';
+import tw from 'tailwind-react-native-classnames';
+import useAuth from '../../auth/useAuth';
 
 // create a component
 const DobInput = () => {
+	const { user } = useAuth();
 	const navigation = useNavigation();
 
-	const [ date, setDate ] = useState(new Date());
-	const [ mode, setMode ] = useState('date');
+	const [ email, setEmail ] = useState('');
+	const [ name, setName ] = useState('');
 	const [ show, setShow ] = useState(false);
+	const [ mode, setMode ] = useState('date');
+	const [ date, setDate ] = useState(new Date());
 	const [ val, setVal ] = useState('MM / DD / YYYY');
 
 	const nullField = !date;
+
+	// set google user name and email
+	useEffect(
+		() => {
+			let unsub = true;
+
+			if (unsub && user) {
+				let name = user.displayName;
+				let email = user.email;
+				setEmail(email);
+				setName(name);
+			}
+
+			return () => (unsub = false);
+		},
+		[ user ]
+	);
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
@@ -38,14 +58,25 @@ const DobInput = () => {
 	};
 
 	const handleContinueRegistration = async () => {
-		try {
+		if (user) {
+			const currentUser = [];
+
+			let obj = {
+				dob: date,
+				name: name,
+				email_address: email
+			};
+			currentUser.push(obj);
+			await AsyncStorage.setItem('userDetails', JSON.stringify(currentUser));
+			navigation.navigate('Gender');
+		} else {
 			const savedUser = await AsyncStorage.getItem('userDetails');
 			const currentUser = JSON.parse(savedUser) || [];
 
 			currentUser[0].dob = date;
 			await AsyncStorage.setItem('userDetails', JSON.stringify(currentUser));
 			navigation.navigate('Gender');
-		} catch (error) {}
+		}
 	};
 
 	return (

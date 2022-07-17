@@ -72,7 +72,7 @@ const Passion = () => {
 				AsyncStorage.setItem('loggedIn', JSON.stringify(response));
 				setTimeout(() => {
 					navigation.navigate('Drawers');
-				}, 2000);
+				}, 1000);
 			})
 			.catch((error) => {
 				Toast.show({

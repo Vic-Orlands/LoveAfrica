@@ -178,7 +178,7 @@ const Chat = () => {
 								display: 'flex',
 								justifyContent: 'space-between',
 								alignItems: 'center',
-								maxWidth: '100%'
+								maxWidth: '100%',
 							}
 						]}
 					>

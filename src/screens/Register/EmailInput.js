@@ -12,18 +12,6 @@ const EmailInput = () => {
 	const navigation = useNavigation();
 	const [ email, setEmail ] = useState('');
 
-	// const checkEmailExist = async () => {
-	// 	const savedUser = await AsyncStorage.getItem('userDetails');
-	// 	const currentUser = JSON.parse(savedUser);
-	// 	if (currentUser && currentUser[0].email) {
-	// 		navigation.navigate('PasswordInput');
-	// 	}
-	// };
-
-	// useLayoutEffect(() => {
-	// 	checkEmailExist();
-	// }, []);
-
 	const handleContinueRegistration = async () => {
 		try {
 			const userDetails = [];

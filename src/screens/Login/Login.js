@@ -33,7 +33,9 @@ const Login = () => {
 				navigation.navigate('Drawers');
 			})
 			.catch((error) => {
-				const errorMessage = error.message.includes('auth/wrong-password') ? 'Wrong password' : errorMessage;
+				const errorMessage = error.message.includes('auth/wrong-password')
+					? 'Wrong password'
+					: error.message.includes('auth/user-not-found') ? 'User does not exist' : errorMessage;
 
 				Toast.show({
 					type: 'error',

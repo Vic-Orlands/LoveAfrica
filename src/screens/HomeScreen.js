@@ -1,29 +1,14 @@
 import React, { Fragment } from 'react';
-import { TouchableOpacity, Text, View, Image, SafeAreaView, Pressable, TextBase } from 'react-native';
+import { TouchableOpacity, Text, View, Image, SafeAreaView, Pressable } from 'react-native';
 import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import loveImage from '../../assets/love_text_black.png';
 import tw from 'tailwind-react-native-classnames';
-
-import Loading from '../components/Loading';
-import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
 
 // import react toastify module
 import Toast from 'react-native-toast-message';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import useAuth from '../auth/useAuth';
-
-// const fadeAnim = React.useRef(new Animated.Value(0)).current;
-
-// const fadeIn = () => {
-//   // Will change fadeAnim value to 1 in 5 seconds
-//   Animated.timing(fadeAnim, {
-//     toValue: 1,
-//     duration: 5000
-//   }).start();
-// };
 
 const Email = () => {
 	return <MaterialIcons name="email" size={24} color="red" />;
@@ -85,9 +70,6 @@ const HomeScreen = () => {
 		promptAsync()
 			.then((res) => {
 				if (res.type === 'success') {
-					//set user logged in to true
-					AsyncStorage.setItem('loggedIn', JSON.stringify(res));
-
 					const { idToken, accessToken } = res.authentication;
 					const auth = getAuth();
 					const credential = GoogleAuthProvider.credential(idToken, accessToken);
@@ -97,13 +79,14 @@ const HomeScreen = () => {
 						type: 'success',
 						position: 'top',
 						text1: 'Login successful!',
-						visibilityTime: 2000,
+						visibilityTime: 1000,
 						autoHide: true
 					});
 
 					setTimeout(() => {
-						navigation.navigate('Feeds');
-					}, 2000);
+						// navigation.navigate('Feeds');
+					navigation.navigate('DobInput');
+					}, 1000);
 				}
 			})
 			.catch((err) => {
@@ -186,8 +169,6 @@ const HomeScreen = () => {
 							</Text>
 						</Pressable>
 
-						{/* <Button title='Splash Screen' onPress={() => navigation.navigate("Splashscreen")} /> */}
-						{/* Text for sign in here */}
 						<View style={tw`mt-12 w-full border border-white`} />
 						<View style={tw`pt-6`}>
 							<Text style={[ { fontFamily: 'Bold' }, tw`text-white max-w-sm text-center px-4 ` ]}>

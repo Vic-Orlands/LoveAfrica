@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import tw from 'tailwind-react-native-classnames';
 import FooterImg from '../../components/FooterImg';
+import tw from 'tailwind-react-native-classnames';
 
 import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { auth } from '../../../firebase';
@@ -28,15 +28,7 @@ const MobileVerification = ({ route }) => {
 		try {
 			const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
 			await signInWithCredential(auth, credential).then((response) => {
-				Toast.show({
-					type: 'success',
-					position: 'top',
-					text1: 'Phone authentication successful 👍'
-				});
-
-				setTimeout(() => {
-					navigation.navigate('PhoneSuccess');
-				}, 2000);
+				navigation.navigate('PhoneSuccess');
 			});
 		} catch (err) {
 			if (err.message.includes('auth/code-expired')) {

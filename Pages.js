@@ -28,19 +28,15 @@ import Messages from './src/screens/Home/Messages';
 import SettingInfo from './src/screens/Home/settings/SettingInfo';
 import Likes from './src/screens/Home/Likes';
 import Chat from './src/screens/Home/Chat';
-import Gifted from './src/screens/Home/Gifted';
 import ChatStarter from './src/screens/Home/ChatStarter';
 import EditProfile from './src/screens/Home/settings/EditProfile';
 import ProfileInfo from './src/screens/Home/ProfileInfo';
-import Facebook from './src/screens/Home/Facebook';
 import MatchPage from './src/screens/Home/MatchPage';
 import Login from './src/screens/Login/Login';
 import UpdateProfile from './src/screens/Home/settings/UpdateProfile';
 
 import MyDrawers from './src/components/MyDrawers';
-import MsgHeader from './src/components/MsgHeader';
 import useAuth from './src/auth/useAuth';
-import Drawers from './src/Drawers';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -58,13 +54,20 @@ const LoggedInPages = () => {
 				<Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
 				<Stack.Screen name="ChatStarter" component={ChatStarter} options={{ headerShown: false }} />
 				<Stack.Screen name="ProfileInfo" component={ProfileInfo} options={{ headerShown: false }} />
-			</Stack.Group>
 
+				{/* // for profile update */}
+				<Stack.Screen name="DobInput" component={DobInput} options={{ title: '' }} />
+				<Stack.Screen name="Gender" component={Gender} options={{ title: 'LoveAfrica' }} />
+				<Stack.Screen name="InterestedIn" component={InterestedIn} options={{ title: 'LoveAfrica' }} />
+				<Stack.Screen name="ChoosePhoto" component={ChoosePhoto} options={{ title: 'LoveAfrica' }} />
+				<Stack.Screen name="AlmostDone" component={AlmostDone} options={{ headerShown: false }} />
+				<Stack.Screen name="Passion" component={Passion} options={{ title: '' }} />
+				<Stack.Screen name="Drawers" component={DrawersRoutes} options={{ headerShown: false }} />
+			</Stack.Group>
 			{/* // match screen */}
 			<Stack.Group screenOptions={{ presentation: 'transparentModal' }}>
 				<Stack.Screen name="MatchScreen" component={MatchPage} options={{ headerShown: false }} />
 			</Stack.Group>
-
 			{/* // modal screen */}
 			<Stack.Group screenOptions={{ presentation: 'modal' }}>
 				<Stack.Screen
@@ -96,13 +99,11 @@ function DrawersRoutes() {
 function OffLinePages() {
 	return (
 		<Stack.Navigator>
-			{/* show this screen if the hasnt been launched before */}
 			<Stack.Screen
 				name="Onboarding"
 				component={Onboarding}
 				options={{ title: 'LoveAfrica', headerShown: false }}
 			/>
-			{/* The "LOADING" screen should serve/be used as a loader in the entire app */}
 			<Stack.Screen name="Loading" component={Loading} options={{ title: 'LoveAfrica', headerShown: false }} />
 			<Stack.Screen name="Load" component={Load} options={{ title: 'LoveAfrica', headerShown: false }} />
 
@@ -125,27 +126,21 @@ function OffLinePages() {
 			<Stack.Screen name="ChoosePhoto" component={ChoosePhoto} options={{ title: 'LoveAfrica' }} />
 			<Stack.Screen name="AlmostDone" component={AlmostDone} options={{ headerShown: false }} />
 			<Stack.Screen name="Passion" component={Passion} options={{ title: '' }} />
-			{/* // login page */}
 			<Stack.Screen name="Login" component={Login} options={{ title: 'LoveAfrica' }} />
-
-			{/* The screen to redirect to after loggin in */}
 			<Stack.Screen name="Drawers" component={DrawersRoutes} options={{ headerShown: false }} />
-
-			{/* <Stack.Screen name="Gifted" component={Gifted} options={{ headerShown: false }} /> */}
-			{/* <Stack.Screen name="Facebook" component={Facebook} options={{ title: "Facebook" }} /> */}
 		</Stack.Navigator>
 	);
 }
 
 const MainPages = () => {
 	const { user } = useAuth();
-	
+
 	return (
 		<Stack.Navigator>
-			{user ? (
-				<Stack.Screen name="LoggedIn" component={DrawersRoutes} options={{ headerShown: false }} />
-			) : (
+			{!user ? (
 				<Stack.Screen name="LoggedOut" component={OffLinePages} options={{ headerShown: false }} />
+			) : (
+				<Stack.Screen name="LoggedIn" component={DrawersRoutes} options={{ headerShown: false }} />
 			)}
 		</Stack.Navigator>
 	);

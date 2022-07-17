@@ -33,7 +33,7 @@ const Feeds = () => {
 		() =>
 			onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
 				if (!snapshot.exists()) {
-					navigation.navigate('UpdateModal');
+					navigation.navigate('DobInput');
 				}
 			}),
 		[]

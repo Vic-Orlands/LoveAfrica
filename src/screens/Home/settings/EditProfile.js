@@ -12,11 +12,12 @@ import {
 	SafeAreaView
 } from 'react-native';
 import { Ionicons, AntDesign, FontAwesome, FontAwesome5, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { ImageBrowser } from 'expo-image-picker-multiple';
 import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../../components/FooterImg';
+import ImageView from 'react-native-image-viewing';
 import Slider from '@react-native-community/slider';
-import * as ImagePicker from 'expo-image-picker';
-import { ImageBrowser } from 'expo-image-picker-multiple';
+// import * as MediaLibrary from 'expo-media-library';
 import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../../components/TopNav';
 import myImgs from '../../../../assets/splash.png';
@@ -27,20 +28,45 @@ const EditProfile = () => {
 	const navigation = useNavigation();
 	const [ Age, setAge ] = useState(30);
 	const [ Miles, setMiles ] = useState(0);
-	const [ image, setImage ] = useState(null);
+	const [ image, setImage ] = useState([]);
 
 	//select images
-	const pickImage = async () => {
-		let result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.All,
-			allowsEditing: true,
-			aspect: [ 4, 3 ],
-			quality: 1
-		});
-		if (!result.cancelled) {
-			setImage(result.uri);
-		}
-	};
+	// const imagesCallback = (callback) => {
+	// 	const { navigation } = this.props;
+	// 	this.props.navigation.setOptions({
+	// 		headerRight: () => this._getHeaderLoader()
+	// 	});
+
+	// 	callback
+	// 		.then(async (photos) => {
+	// 			const cPhotos = [];
+	// 			for (let photo of photos) {
+	// 				const pPhoto = await _processImageAsync(photo.uri);
+	// 				cPhotos.push({
+	// 					uri: pPhoto.uri,
+	// 					name: photo.filename,
+	// 					type: 'image/jpg'
+	// 				});
+	// 			}
+	// 			navigation.navigate('Main', { photos: cPhotos });
+	// 		})
+	// 		.catch((e) => console.log(e));
+	// };
+
+	// const _processImageAsync = async (uri) => {
+	// 	const file = await ImageManipulator.manipulateAsync(uri, [ { resize: { width: 1000 } } ], {
+	// 		compress: 0.8,
+	// 		format: ImageManipulator.SaveFormat.JPEG
+	// 	});
+	// 	return file;
+	// };
+
+	// const updateHandler = (count, onSubmit) => {
+	// 	this.props.navigation.setOptions({
+	// 		title: `Selected ${count} files`,
+	// 		headerRight: () => this._renderDoneButton(count, onSubmit)
+	// 	});
+	// };
 
 	const Photo = ({ ImageHere, icon }) => {
 		return (
@@ -83,7 +109,7 @@ const EditProfile = () => {
 				<View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
 					<TouchableOpacity
 						style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`}
-						onPress={pickImage}
+						// onPress={pickImage}
 					>
 						<AntDesign name="plussquare" size={24} color="white" />
 						<Text
@@ -97,7 +123,11 @@ const EditProfile = () => {
 					</TouchableOpacity>
 				</View>
 
-				{/* <ImageBrowser max={4} onChange={(num, onSubmit) => {}} callback={(callback) => {}} /> */}
+				{/* <View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
+					<ImageBrowser max={4} onChange={updateHandler} callback={imagesCallback} />
+				</View> */}
+
+				{/* <ImageView images={image} imageIndex={0} visible={visible} onRequestClose={() => setIsVisible(false)} /> */}
 			</React.Fragment>
 		);
 	};
