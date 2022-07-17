@@ -33,10 +33,16 @@ import EditProfile from './src/screens/Home/settings/EditProfile';
 import ProfileInfo from './src/screens/Home/ProfileInfo';
 import MatchPage from './src/screens/Home/MatchPage';
 import Login from './src/screens/Login/Login';
-import UpdateProfile from './src/screens/Home/settings/UpdateProfile';
+import UpdateProfile from './src/screens/Home/settings/SelectImages';
 
 import MyDrawers from './src/components/MyDrawers';
 import useAuth from './src/auth/useAuth';
+
+import ChangePassword from './src/screens/Home/settings/changeDetails/ChangePassword';
+import ChangePhoneNumber from './src/screens/Home/settings/changeDetails/ChangePhoneNumber';
+import ChangeGender from './src/screens/Home/settings/changeDetails/ChangeGender';
+import ChangeAge from './src/screens/Home/settings/changeDetails/ChangeAge';
+import ChangeInterest from './src/screens/Home/settings/changeDetails/ChangeInterest';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -54,6 +60,14 @@ const LoggedInPages = () => {
 				<Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
 				<Stack.Screen name="ChatStarter" component={ChatStarter} options={{ headerShown: false }} />
 				<Stack.Screen name="ProfileInfo" component={ProfileInfo} options={{ headerShown: false }} />
+
+				{/* edit profile info */}
+				<Stack.Screen name="ChangePassword" component={ChangePassword} options={{ headerShown: false }} />
+				<Stack.Screen name="ChangePhoneNumber" component={ChangePhoneNumber} options={{ headerShown: false }} />
+				<Stack.Screen name="ChangeGender" component={ChangeGender} options={{ headerShown: false }} />
+				<Stack.Screen name="ChangeAge" component={ChangeAge} options={{ headerShown: false }} />
+				<Stack.Screen name="ChangeInterest" component={ChangeInterest} options={{ headerShown: false }} />
+				{/* <Stack.Screen name="ChangeProfilePicture" component={ChangeProfilePicture} options={{ headerShown: false }} /> */}
 
 				{/* // for profile update */}
 				<Stack.Screen name="DobInput" component={DobInput} options={{ title: '' }} />

@@ -16,7 +16,7 @@ import useAuth from '../auth/useAuth';
 import { db } from '../../firebase';
 
 const MyDrawers = (props) => {
-	const { user } = useAuth();
+	const { user, handleSignOut } = useAuth();
 	const navigation = useNavigation();
 	const [ profile, setProfile ] = useState([]);
 
@@ -60,7 +60,7 @@ const MyDrawers = (props) => {
 						<View style={tw`w-3/4 flex`}>
 							<Text style={[ { fontFamily: 'Bold' }, tw` text-base` ]}>{theText}</Text>
 						</View>
-						<View style={tw`w-1/4  flex  items-end`}>{theIcon}</View>
+						<View style={tw`w-1/4 flex items-end`}>{theIcon}</View>
 					</View>
 				</View>
 			</TouchableOpacity>
@@ -124,7 +124,7 @@ const MyDrawers = (props) => {
 				</View>
 			</DrawerContentScrollView>
 			<View style={[ { bottom: 0 }, tw`px-4 pb-3` ]}>
-				<ActionButton InfoText="Log Out" InfoIcon={<SimpleLineIcons name="logout" size={24} color="white" />} />
+				<ActionButton InfoText="Log Out" InfoIcon={<SimpleLineIcons name="logout" size={24} color="white" />} action={() => handleSignOut()} />
 			</View>
 		</SafeAreaView>
 	);

@@ -18,21 +18,14 @@ const UpdateProfile = () => {
 	const phoneInput = createRef(null);
 	const navigation = useNavigation();
 
-	const [ bgColor, setColor ] = useState('');
 	const [ show, setShow ] = useState(false);
 	const [ mode, setMode ] = useState('date');
 	const [ val, setVal ] = useState('MM / DD / YYYY');
 
-	const [ sex, setSex ] = useState();
 	const [ email, setEmail ] = useState('');
-	const [ info, setInfo ] = useState(false);
 	const [ name, setName ] = useState('');
 	const [ image, setImage ] = useState(null);
-	const [ password, setPassword ] = useState('');
 	const [ date, setDate ] = useState(new Date());
-	const [ interestedIn, setInterestedIn ] = useState('');
-	const [ phoneNumber, setPhoneNumber ] = useState('');
-	const [ confirmPassword, setConfirmPassword ] = useState('');
 
 	// set google user name and email
 	useEffect(
@@ -84,26 +77,8 @@ const UpdateProfile = () => {
 		showMode('date');
 	};
 
-	// handle setting gender
-	const handleSetGender = (props) => {
-		setSex(props);
-		setColor('#CC0000');
-	};
 
-	// handle setting interest or preference
-	const handlesetPreference = (props) => {
-		setInterestedIn(props);
-		setColor('#CC0000');
-	};
 
-	// check if passord matches
-	const checkPasswordmatch = () => {
-		if (password !== confirmPassword) {
-			setInfo(true);
-		} else {
-			setInfo(false);
-		}
-	};
 
 	//handle to update profile
 	const handleUpdateProfile = async () => {
@@ -114,7 +89,6 @@ const UpdateProfile = () => {
 			image: image,
 			password: password,
 			email_address: email,
-			interested_in: interestedIn,
 			phone_number: phoneNumber,
 			confirm_password: confirmPassword,
 			timestamp: serverTimestamp()
@@ -220,39 +194,7 @@ const UpdateProfile = () => {
 							]}
 						/>
 
-						<Text style={tw`flex items-center mt-4`}>Password</Text>
-						<TextInput
-							placeholder="************"
-							keyboardType="default"
-							value={password}
-							onChangeText={setPassword}
-							style={[
-								tw` w-80 px-3 py-4 rounded-xl text-center shadow`,
-								{ backgroundColor: '#F0E0E0' }
-							]}
-							returnKeyType="done"
-							autoComplete="password"
-							secureTextEntry={true}
-						/>
-
-						<Text style={tw`flex items-center mt-4`}>Confirm Password</Text>
-						<TextInput
-							placeholder="************"
-							keyboardType="default"
-							style={[
-								tw` w-80 px-3 py-4 rounded-xl text-center shadow`,
-								{ backgroundColor: '#F0E0E0' }
-							]}
-							value={confirmPassword}
-							onChangeText={setConfirmPassword}
-							returnKeyType="done"
-							autoComplete="password"
-							secureTextEntry={true}
-							onTextInput={checkPasswordmatch}
-						/>
-
-						{info ? <Text>Password does not match</Text> : null}
-
+					
 						<Text style={tw`flex items-center mt-4`}>Full Name</Text>
 						<TextInput
 							keyboardType="default"
@@ -264,83 +206,7 @@ const UpdateProfile = () => {
 							]}
 						/>
 
-						<Text style={tw`flex items-center mt-4`}>Gender</Text>
-						<View style={tw`flex flex-row`}>
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 rounded-xl pt-6 text-center shadow`,
-									sex === 'Male'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handleSetGender('Male')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Male</Text>
-							</TouchableOpacity>
 
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 mx-4 rounded-xl pt-6 text-center shadow`,
-									sex === 'Female'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handleSetGender('Female')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Female</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 rounded-xl pt-6 text-center shadow`,
-									sex === 'Prefer Not to say'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handleSetGender('Prefer Not to say')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Otherwise</Text>
-							</TouchableOpacity>
-						</View>
-
-						<Text style={tw`flex items-center mt-4`}>Interested In</Text>
-						<View style={tw`flex flex-row`}>
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 rounded-xl pt-6 text-center shadow`,
-									interestedIn === 'Male'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handlesetPreference('Male')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Male</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 mx-4 rounded-xl pt-6 text-center shadow`,
-									interestedIn === 'Female'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handlesetPreference('Female')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Female</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity
-								style={[
-									tw` w-24 h-16 rounded-xl pt-6 text-center shadow`,
-									interestedIn === 'Both'
-										? { borderColor: bgColor, backgroundColor: '#F0E0E0', borderWidth: 3 }
-										: { backgroundColor: '#F0E0E0', borderWidth: 3, borderColor: '#F0E0E0' }
-								]}
-								onPress={() => handlesetPreference('Both')}
-							>
-								<Text style={[ { fontFamily: 'Regular' }, tw`text-center` ]}>Both</Text>
-							</TouchableOpacity>
-						</View>
 
 						<Text style={tw`flex items-center mt-8`}>Choose Photo</Text>
 						<View style={[ tw`flex items-center rounded-xl pb-4`, styles.rounded ]}>

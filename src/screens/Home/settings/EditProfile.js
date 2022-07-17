@@ -1,91 +1,141 @@
 //import liraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	View,
 	Text,
-	StyleSheet,
-	TouchableOpacity,
-	ScrollView,
 	StatusBar,
-	Pressable,
+	ScrollView,
+	StyleSheet,
+	SafeAreaView,
+	TouchableOpacity,
 	ImageBackground,
-	SafeAreaView
 } from 'react-native';
 import { Ionicons, AntDesign, FontAwesome, FontAwesome5, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
-import { ImageBrowser } from 'expo-image-picker-multiple';
 import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../../components/FooterImg';
-import ImageView from 'react-native-image-viewing';
-import Slider from '@react-native-community/slider';
-// import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../../components/TopNav';
 import myImgs from '../../../../assets/splash.png';
 import Cards from '../../../components/Cards';
 
+// import react toastify module
+import { onSnapshot, query, collection, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
+import Toast from 'react-native-toast-message';
+import useAuth from '../../../auth/useAuth';
+import { db } from '../../../../firebase';
+
 // create a component
 const EditProfile = () => {
+	const { user } = useAuth();
 	const navigation = useNavigation();
-	const [ Age, setAge ] = useState(30);
-	const [ Miles, setMiles ] = useState(0);
-	const [ image, setImage ] = useState([]);
+	const [ profile, setProfile ] = useState([]);
+	const [ image, setImage ] = useState(null);
+	const [ loading, setLoading ] = useState(false);
+
+	useEffect(
+		() =>
+			onSnapshot(query(collection(db, 'users')), (snapshot) => {
+				setProfile(
+					snapshot.docs.filter((doc) => doc.id === user.uid).map((doc) => ({
+						id: doc.id,
+						...doc.data()
+					}))
+				);
+			}),
+		[]
+	);
 
 	//select images
-	// const imagesCallback = (callback) => {
-	// 	const { navigation } = this.props;
-	// 	this.props.navigation.setOptions({
-	// 		headerRight: () => this._getHeaderLoader()
-	// 	});
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [ 4, 3 ],
+			quality: 1
+		});
+		if (!result.cancelled) {
+			setImage(result.uri);
+		}
+	};
 
-	// 	callback
-	// 		.then(async (photos) => {
-	// 			const cPhotos = [];
-	// 			for (let photo of photos) {
-	// 				const pPhoto = await _processImageAsync(photo.uri);
-	// 				cPhotos.push({
-	// 					uri: pPhoto.uri,
-	// 					name: photo.filename,
-	// 					type: 'image/jpg'
-	// 				});
-	// 			}
-	// 			navigation.navigate('Main', { photos: cPhotos });
-	// 		})
-	// 		.catch((e) => console.log(e));
-	// };
+	//calculate age from returned dob
+	const calculateAge = (dateString) => {
+		var today = new Date();
+		var birthDate = new Date(dateString);
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		return age;
+	};
 
-	// const _processImageAsync = async (uri) => {
-	// 	const file = await ImageManipulator.manipulateAsync(uri, [ { resize: { width: 1000 } } ], {
-	// 		compress: 0.8,
-	// 		format: ImageManipulator.SaveFormat.JPEG
-	// 	});
-	// 	return file;
-	// };
+	const handleSaveImage = async () => {
+		setLoading(true);
+		await updateDoc(doc(db, 'users', user.uid), {
+			image: image,
+			timeStamp: serverTimestamp()
+		})
+			.then(() => {
+				setLoading(false);
 
-	// const updateHandler = (count, onSubmit) => {
-	// 	this.props.navigation.setOptions({
-	// 		title: `Selected ${count} files`,
-	// 		headerRight: () => this._renderDoneButton(count, onSubmit)
-	// 	});
-	// };
+				Toast.show({
+					type: 'success',
+					position: 'top',
+					text1: `Image has been saved successfully!`
+				});
+
+				setTimeout(() => {
+					navigation.navigate('Feeds');
+				}, 2000);
+			})
+			.catch((error) => {
+				setLoading(false);
+				Toast.show({
+					type: 'error',
+					position: 'top',
+					text1: error.code,
+					text2: 'Reset password or try again later'
+				});
+			});
+	}
 
 	const Photo = ({ ImageHere, icon }) => {
 		return (
 			<React.Fragment>
 				<View>
-					<View style={tw`w-24 h-24 relative rounded-xl `}>
-						<ImageBackground source={ImageHere} resizeMode="cover" style={tw`h-full w-full rounded-xl`}>
-							<View
-								style={[
-									{ backgroundColor: '#cc0000' },
-									tw` rounded-full right-0 absolute bottom-0 flex-row items-center`
-								]}
-							>
-								<View>
-									<TouchableOpacity>{icon}</TouchableOpacity>
+					{image ? (
+						<View style={[ tw`w-24 h-24 relative rounded-xl`, { borderWidth: 2 } ]}>
+							<ImageBackground source={{ uri: image }} resizeMode="cover" style={tw`h-full w-full`}>
+								<View
+									style={[
+										{ backgroundColor: '#cc0000' },
+										tw` rounded-full right-0 absolute bottom-0 flex-row items-center`
+									]}
+								>
+									<View>
+										<TouchableOpacity onPress={() => setImage(null)}>{icon}</TouchableOpacity>
+									</View>
 								</View>
-							</View>
-						</ImageBackground>
-					</View>
+							</ImageBackground>
+						</View>
+					) : (
+						<View style={tw`w-24 h-24 relative rounded-xl`}>
+							<ImageBackground source={ImageHere} resizeMode="cover" style={tw`h-full w-full rounded-xl`}>
+								<View
+									style={[
+										{ backgroundColor: '#cc0000' },
+										tw` rounded-full right-0 absolute bottom-0 flex-row items-center`
+									]}
+								>
+									<View>
+										<TouchableOpacity>{icon}</TouchableOpacity>
+									</View>
+								</View>
+							</ImageBackground>
+						</View>
+					)}
 				</View>
 			</React.Fragment>
 		);
@@ -96,38 +146,39 @@ const EditProfile = () => {
 			<React.Fragment>
 				<View style={tw`mb-6 flex-row justify-evenly`}>
 					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
-					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
-					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
-				</View>
-
-				<View style={tw`mb-6 flex-row justify-evenly`}>
-					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
-					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
-					<Photo ImageHere={myImgs} icon={<Entypo name="cross" size={20} color="white" />} />
 				</View>
 
 				<View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
-					<TouchableOpacity
+				{!image ? <TouchableOpacity
 						style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`}
-						// onPress={pickImage}
+						onPress={pickImage}
 					>
 						<AntDesign name="plussquare" size={24} color="white" />
 						<Text
 							style={[
 								{ fontFamily: 'Bold' },
-								tw` ml-4 text-center flex justify-center  text-white  text-base`
+								tw` ml-4 text-center flex justify-center  text-white text-base`
 							]}
 						>
-							Add to Gallery
+							Change Avatar
 						</Text>
-					</TouchableOpacity>
+					</TouchableOpacity> : 
+					<TouchableOpacity
+					style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`}
+					onPress={handleSaveImage}
+				>
+					<AntDesign name="plussquare" size={24} color="white" />
+					<Text
+						style={[
+							{ fontFamily: 'Bold' },
+							tw` ml-4 text-center flex justify-center  text-white  text-base`
+						]}
+					>
+						{ !loading ? "Update Avatar" : "Updating..."}
+					</Text>
+				</TouchableOpacity>
+					}
 				</View>
-
-				{/* <View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
-					<ImageBrowser max={4} onChange={updateHandler} callback={imagesCallback} />
-				</View> */}
-
-				{/* <ImageView images={image} imageIndex={0} visible={visible} onRequestClose={() => setIsVisible(false)} /> */}
 			</React.Fragment>
 		);
 	};
@@ -144,18 +195,25 @@ const EditProfile = () => {
 
 					<Cards
 						title="Phone Number"
-						slug="+1234567890"
+						slug={profile[0]?.phone_number}
 						yes={<MaterialIcons name="arrow-forward-ios" size={24} color="#cc0000" />}
+						action={() => navigation.navigate('ChangePhoneNumber')}
 					/>
-					<Cards
+					{/* <Cards
 						title="Allow User to call"
 						yes={<FontAwesome name="toggle-on" size={28} color="#cc0000" />}
-					/>
-					<Cards title="Change Password" yes={<Ionicons name="key-sharp" size={24} color="#cc0000" />} />
+					/> */}
+
 					<Cards
+						title="Change Password"
+						action={() => navigation.navigate('ChangePassword')}
+						yes={<Ionicons name="key-sharp" size={24} color="#cc0000" />}
+					/>
+
+					{/* <Cards
 						title="Enable push Notifications"
 						yes={<FontAwesome name="toggle-on" size={28} color="#cc0000" />}
-					/>
+					/> */}
 					<Cards
 						title="Show my socials to the public."
 						yes={<FontAwesome name="toggle-on" size={28} color="#cc0000" />}
@@ -174,8 +232,13 @@ const EditProfile = () => {
 		return (
 			<React.Fragment>
 				<View style={tw`w-full mt-8`}>
-					<Text style={[ { fontFamily: 'Bold' }, tw` text-xl` ]}>My Preferences (Show Me).</Text>
-					<Cards title="Men" yes={<Feather name="toggle-left" size={28} color="#cc0000" />} />
+					<Text style={[ { fontFamily: 'Bold' }, tw` text-xl` ]}>My Preferences</Text>
+					<Cards
+						title={profile[0]?.interested_in === "Male" ? "Men" : profile[0]?.interested_in === "Female" ? "Women" : "Both Men and Female" }
+						action={() => navigation.navigate('ChangeInterest')}
+						 yes={<Feather name="toggle-left" size={28} color="#cc0000" />}
+					/>
+
 					<Cards
 						title=" Nigeria"
 						slug={<Feather name="flag" size={20} color="#cc0000" />}
@@ -184,38 +247,18 @@ const EditProfile = () => {
 
 					<Text style={tw`mt-5 pl-1`}>Age</Text>
 					<Cards
-						title={
-							<Slider
-								minimumValue={18}
-								maximumValue={70}
-								value={Age}
-								minimumTrackTintColor="#cc0000"
-								maximumTrackTintColor="gray"
-								onValueChange={(value) => setAge(Math.floor(value))}
-								style={[ { width: 150 }, tw`` ]}
-								thumbTintColor="#cc0000"
-							/>
-						}
-						yes="18 - "
-						no={Math.floor(Age)}
+						title="Age"
+						slug={calculateAge(profile[0]?.dob)}
+						yes={<MaterialIcons name="arrow-forward-ios" size={24} color="#cc0000" />}
+						action={() => navigation.navigate('ChangeAge')}
 					/>
 
-					<Text style={tw`mt-5 pl-1`}>Distance</Text>
+					<Text style={tw`mt-5 pl-1`}>Gender</Text>
 					<Cards
-						title={
-							<Slider
-								minimumValue={0}
-								maximumValue={5}
-								value={Miles}
-								minimumTrackTintColor="#cc0000"
-								maximumTrackTintColor="gray"
-								onValueChange={(value) => setMiles(Math.floor(value))}
-								style={[ { width: 150 }, tw`` ]}
-								thumbTintColor="#cc0000"
-							/>
-						}
-						no="mi"
-						yes={Math.floor(Miles)}
+						title="Gender"
+						slug={profile[0]?.sex}
+						yes={<MaterialIcons name="arrow-forward-ios" size={24} color="#cc0000" />}
+						action={() => navigation.navigate('ChangeGender')}
 					/>
 
 					<Cards title="Clear cache" yes={<FontAwesome5 name="database" size={24} color="#cc0000" />} />

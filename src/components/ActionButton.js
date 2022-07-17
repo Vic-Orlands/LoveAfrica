@@ -1,19 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
-import useAuth from '../auth/useAuth';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-const ActionButton = ({ InfoText, InfoIcon }) => {
-	const { handleSignOut } = useAuth();
-
-	const logOut = () => {
-		handleSignOut();
-	};
-
+const ActionButton = ({ InfoText, InfoIcon, action }) => {
 	return (
 		<View style={tw`w-full mt-4 flex`}>
 			<View style={[ tw`w-full bg-gray-200 rounded-lg mt-1`, { backgroundColor: '#cc0000' } ]}>
-				<TouchableOpacity style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`} onPress={logOut}>
+				<TouchableOpacity style={tw`p-4 bottom-0 right-0 flex-row justify-center w-full`} onPress={action}>
 					{InfoIcon}
 					<Text
 						style={[

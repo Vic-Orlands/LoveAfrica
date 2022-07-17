@@ -84,8 +84,7 @@ const HomeScreen = () => {
 					});
 
 					setTimeout(() => {
-						// navigation.navigate('Feeds');
-					navigation.navigate('DobInput');
+						navigation.navigate('DobInput');
 					}, 1000);
 				}
 			})

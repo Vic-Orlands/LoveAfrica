@@ -272,14 +272,14 @@ const Feeds = () => {
 									<Image style={tw`h-full w-full rounded-xl top-0 `} source={{ uri: card.image }} />
 
 									<View
-										style={tw`flex-row items-center justify-center absolute bottom-0 bg-white w-full h-16 bg-opacity-20 rounded-b-xl`}
+										style={tw`flex-row items-center justify-center absolute bottom-0 bg-white w-full h-16 bg-opacity-10 rounded-b-xl`}
 									>
 										<View style={tw`flex items-center justify-center `}>
 											<Text style={[ { fontFamily: 'Bold' }, tw` pt-3 text-base text-white ` ]}>
 												{card.name}, {calculateAge(card.dob)}
 											</Text>
 										</View>
-										<View style={tw`flex items-center justify-center  pl-2`}>
+										<View style={tw`flex items-center justify-center pl-2`}>
 											<Pressable
 												onPress={() => navigation.navigate('ProfileInfo', { user: card })}
 											>
