@@ -4,8 +4,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import tw from 'tailwind-react-native-classnames';
 
 const MatchPage = () => {
-	const navigation = useNavigation();
 	const { params } = useRoute();
+	const navigation = useNavigation();
 	const { loggedInProfile, userSwiped } = params;
 
 	return (

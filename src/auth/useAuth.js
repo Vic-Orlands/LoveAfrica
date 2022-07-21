@@ -11,6 +11,7 @@ app;
 
 export const AuthProvider = ({ children }) => {
 	const [ user, setUser ] = useState(null);
+	const [ isNewUser, setIsNewUser ] = useState(false);
 	const [ loadingInitial, setLoadingInitial ] = useState(true);
 
 	// google login
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 			auth.onAuthStateChanged((user) => {
 				if (user) {
 					setUser(user);
+					setIsNewUser(true);
 				}
 				setLoadingInitial(null);
 			}),
@@ -38,7 +40,8 @@ export const AuthProvider = ({ children }) => {
 		signOut(auth)
 			.then(() => {
 				setUser(null);
-				AsyncStorage.clear();
+				setIsNewUser(true);
+				AsyncStorage.removeItem('userDetails');
 			})
 			.catch((error) => console.error(error));
 	};
@@ -49,6 +52,7 @@ export const AuthProvider = ({ children }) => {
 			user,
 			request,
 			response,
+			isNewUser,
 			promptAsync,
 			handleSignOut,
 			setLoadingInitial

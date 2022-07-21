@@ -1,5 +1,5 @@
 //import liraries
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, createRef } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PhoneInput from 'react-native-phone-number-input';
@@ -14,7 +14,6 @@ import { app, auth } from '../../../firebase';
 
 // import react toastify module
 import Toast from 'react-native-toast-message';
-import useAuth from '../../auth/useAuth';
 
 // create a component
 const PhoneNumber = () => {
@@ -25,27 +24,13 @@ const PhoneNumber = () => {
 	const firebaseConfig = app ? app.options : undefined;
 	const [ phoneNumber, setPhoneNumber ] = useState();
 
-	// useEffect(
-	// 	() => {
-	// 		if (user && user.email) {
-	// 			const googleLoggedInUser = {
-	// 				email_address: user.email,
-	// 				name: user.displayName,
-	// 				image: user.photoURL
-	// 			};
-	// 			setNewUser(googleLoggedInUser);
-	// 		}
-	// 	},
-	// 	[ user ]
-	// );
-
 	// style the toast messages
 	const toastConfig = {
 		success: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
 					backgroundColor: 'green',
@@ -54,29 +39,31 @@ const PhoneNumber = () => {
 					justifyContent: 'center',
 					borderWidth: 1,
 					borderColor: '#ccc',
-					borderRadius: 15
+					borderRadius: 15,
+					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: 'red',
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
 					borderWidth: 1,
 					borderColor: '#ccc',
-					borderRadius: 15
+					borderRadius: 15,
+					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};
@@ -141,7 +128,7 @@ const PhoneNumber = () => {
 						ref={recaptchaVerifier}
 						firebaseConfig={firebaseConfig}
 						title="Prove you are human!"
-						// attemptInvisibleVerification={true}
+						attemptInvisibleVerification={true}
 						cancelLabel="Close"
 					/>
 
@@ -195,15 +182,5 @@ const PhoneNumber = () => {
 		</View>
 	);
 };
-
-// define your styles
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#2c3e50'
-	}
-});
 
 export default PhoneNumber;

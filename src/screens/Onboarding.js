@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
-import tw from 'tailwind-react-native-classnames'
-import { Button, Image, StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native'
+import { Image, StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native'
 import slideOne from '../../assets/onboardone.png';
 import slideTwo from '../../assets/onboardtwo.png';
+import tw from 'tailwind-react-native-classnames'
 
 const { width, height } = Dimensions.get('window');
 const whitish = { white: '#fff' };
@@ -19,9 +19,7 @@ const slides = [
     },
 ];
 
-
-
-const Slide = ({ item }) => {
+const Slide = ({ item }) => {    
     return (
         <SafeAreaView style={tw`flex justify-center items-center`}>
             <Image
@@ -30,15 +28,14 @@ const Slide = ({ item }) => {
             <View style={[tw`text-white text-2xl font-bold mt-8 text-center`, { fontSize: '3rem', color: 'white' }]}>
                 <Text style={[tw`max-w-xs text-base px-4`, { lineHeight: 25, fontFamily: 'Bold' }]}> {item.caption}</Text>
             </View>
-
         </SafeAreaView>
     )
 }
-const Onboarding = ({ navigation }) => {
 
+const Onboarding = ({ navigation }) => {
+    const ref = useRef(null);
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
-    const ref = useRef(null);
     const Footer = () => {
         return (
             <View style={{
@@ -75,13 +72,8 @@ const Onboarding = ({ navigation }) => {
                             <TouchableOpacity onPress={nextSlide} style={[styles.btn]}>
                                 <Text style={[{ fontFamily: 'Bold' }, tw`text-white  text-xl`]}>Next</Text>
                             </TouchableOpacity>
-
                         </View>
-
                 }
-
-
-
             </View>
         )
     };
@@ -100,17 +92,18 @@ const Onboarding = ({ navigation }) => {
             setCurrentSlideIndex(nextSlides);
         }
     };
+
     return (
         <SafeAreaView>
             <FlatList
                 ref={ref}
-                onMomentumScrollEnd={updateSlideIndex}
-                data={slides}
-                contentContainerStyle={{ height: height * 0.75 }}
-                pagingEnabled
                 horizontal
+                data={slides}
+                pagingEnabled
                 showsHorizontalScrollIndicator={false}
+                onMomentumScrollEnd={updateSlideIndex}
                 renderItem={({ item }) => <Slide item={item} />}
+                contentContainerStyle={{ height: height * 0.75 }}
             />
             <Footer />
         </SafeAreaView>

@@ -106,11 +106,11 @@ const EditProfile = () => {
 			<React.Fragment>
 				<View>
 					{image ? (
-						<View style={[ tw`w-24 h-24 relative rounded-xl`, { borderWidth: 2 } ]}>
+						<View style={tw`w-24 h-24 relative rounded-3xl`}>
 							<ImageBackground source={{ uri: image }} resizeMode="cover" style={tw`h-full w-full`}>
 								<View
 									style={[
-										{ backgroundColor: '#cc0000' },
+										{ backgroundColor: '#cc0000'},
 										tw` rounded-full right-0 absolute bottom-0 flex-row items-center`
 									]}
 								>
@@ -122,7 +122,7 @@ const EditProfile = () => {
 						</View>
 					) : (
 						<View style={tw`w-24 h-24 relative rounded-xl`}>
-							<ImageBackground source={ImageHere} resizeMode="cover" style={tw`h-full w-full rounded-xl`}>
+							<ImageBackground source={ImageHere} resizeMode="cover" style={tw`h-full w-full`}>
 								<View
 									style={[
 										{ backgroundColor: '#cc0000' },
@@ -285,10 +285,11 @@ const EditProfile = () => {
 						<View style={tw`w-full`}>
 							<View style={tw`px-6 w-full`}>
 								<View style={tw`pb-4 mt-8 h-full`}>
+									
 									{/* PROFILE SETUP */}
 									<SettingMyProfile />
-									{/* PROFILE SETUP */}
 
+									{/* PROFILE SETUP */}
 									<MyProfilePreference />
 								</View>
 							</View>

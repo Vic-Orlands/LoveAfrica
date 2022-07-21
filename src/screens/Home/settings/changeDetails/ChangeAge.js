@@ -63,8 +63,7 @@ export default function ChangeAge() {
 				Toast.show({
 					type: 'error',
 					position: 'top',
-					text1: error.code,
-					text2: 'Reset password or try again later'
+					text1: error.code
 				});
 			});
 	};
@@ -74,8 +73,8 @@ export default function ChangeAge() {
 		success: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
 					backgroundColor: 'green',
@@ -87,17 +86,17 @@ export default function ChangeAge() {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 14, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: 'red',
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -106,7 +105,7 @@ export default function ChangeAge() {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};
@@ -121,6 +120,13 @@ export default function ChangeAge() {
 			]}
 		>
 			<TopNav Title="Change Age" />
+
+			<Toast
+				config={toastConfig}
+				innerRef={(res) => {
+					Toast.setRef(res);
+				}}
+			/>
 
 			<View style={tw`flex-1 p-4`}>
 				<View style={tw`mt-14`} />

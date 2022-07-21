@@ -1,7 +1,7 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import 'react-native-gesture-handler';
 
 import HomeScreen from './src/screens/HomeScreen';
 import Loading from './src/components/Loading';
@@ -101,8 +101,10 @@ function DrawersRoutes() {
 }
 
 function OffLinePages() {
+	const { isNewUser } = useAuth()
+
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator initialRouteName={!isNewUser ? 'Onboarding' : 'Home'}>
 			<Stack.Screen
 				name="Onboarding"
 				component={Onboarding}
@@ -110,8 +112,6 @@ function OffLinePages() {
 			/>
 			<Stack.Screen name="Loading" component={Loading} options={{ title: 'LoveAfrica', headerShown: false }} />
 			<Stack.Screen name="Load" component={Load} options={{ title: 'LoveAfrica', headerShown: false }} />
-
-			{/* Show this screen is user is logged out and has open the app before */}
 			<Stack.Screen name="Home" component={HomeScreen} options={{ title: 'LoveAfrica', headerShown: false }} />
 
 			<Stack.Screen name="RecoverScreen" component={Recover} options={{ title: 'LoveAfrica' }} />

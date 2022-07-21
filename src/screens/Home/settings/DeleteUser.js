@@ -57,7 +57,7 @@ const UpdateProfile = ({ visible, closeModal }) => {
 			<View
 				style={{
 					height: 45,
-					width: '90%',
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
 					backgroundColor: 'green',
@@ -70,17 +70,17 @@ const UpdateProfile = ({ visible, closeModal }) => {
 					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 14, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
 			<View
 				style={{
 					height: 45,
-					width: '90%',
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: 'red',
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -90,7 +90,7 @@ const UpdateProfile = ({ visible, closeModal }) => {
 					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};
@@ -125,7 +125,12 @@ const UpdateProfile = ({ visible, closeModal }) => {
 					<View style={[ styles.child, tw`items-center` ]}>
 						<View style={tw`pt-2`}>
 							<Text style={[ { fontFamily: 'Regular', zIndex: -3 }, tw`text-white text-2xl pb-4` ]}>
-								Enter password to continue
+								{user.providerData[0].providerId === 'password' ||
+								user.providerData[0].providerId === 'phone' ? (
+									'Enter password to continue'
+								) : (
+									'Proceed to delete your account'
+								)}
 							</Text>
 						</View>
 						{user.providerData[0].providerId === 'password' ||

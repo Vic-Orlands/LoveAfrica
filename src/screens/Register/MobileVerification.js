@@ -49,39 +49,41 @@ const MobileVerification = ({ route }) => {
 		success: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
-					zIndex: 9999,
+					zIndex: 2,
 					backgroundColor: 'green',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
 					borderWidth: 1,
 					borderColor: '#ccc',
-					borderRadius: 15
+					borderRadius: 15,
+					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
-					zIndex: 9999,
-					backgroundColor: 'red',
+					zIndex: 2,
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
 					borderWidth: 1,
 					borderColor: '#ccc',
-					borderRadius: 15
+					borderRadius: 15,
+					transform: [ { scaleX: 0.5 } ]
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};

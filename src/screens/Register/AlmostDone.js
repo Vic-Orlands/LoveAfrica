@@ -1,8 +1,8 @@
 //import liraries
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
+import tw from 'tailwind-react-native-classnames';
 
 // create a component
 const AlmostDone = () => {

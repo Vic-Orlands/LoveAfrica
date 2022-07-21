@@ -44,11 +44,11 @@ const EmailRecover = () => {
 		error: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: 'red',
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -57,7 +57,7 @@ const EmailRecover = () => {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};

@@ -135,8 +135,8 @@ const Feeds = () => {
 		success: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
 					backgroundColor: 'green',
@@ -148,7 +148,7 @@ const Feeds = () => {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};

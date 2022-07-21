@@ -74,7 +74,7 @@ const ProfileInfo = ({ route }) => {
 					<View style={tw` pb-8 w-full `}>
 						<View style={tw`flex flex-row justify-evenly mx-5 items-center bottom-0  pt-4 `}>
 							<View style={[ tw`flex justify-center items-center ` ]}>
-								<TouchableOpacity style={[ tw`  rounded-full ` ]}>
+								<TouchableOpacity style={[ tw`rounded-full ` ]}>
 									<AntDesign name="message1" size={32} color="#cc0000" />
 								</TouchableOpacity>
 								<Text style={[ { fontFamily: 'Regular' }, tw`text-xs text-center` ]}>Message</Text>

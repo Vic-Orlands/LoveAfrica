@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
@@ -55,8 +55,7 @@ export default function ChangeName() {
 				Toast.show({
 					type: 'error',
 					position: 'top',
-					text1: error.code,
-					text2: 'Reset password or try again later'
+					text1: error.code
 				});
 			});
 	};
@@ -66,8 +65,8 @@ export default function ChangeName() {
 		success: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
 					backgroundColor: 'green',
@@ -79,17 +78,17 @@ export default function ChangeName() {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 14, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		),
 		error: (internalState) => (
 			<View
 				style={{
-					height: 65,
-					width: '90%',
+					height: 45,
+					width: '80%',
 					marginTop: -15,
 					zIndex: 2,
-					backgroundColor: 'red',
+					backgroundColor: '#cc0000',
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -98,7 +97,7 @@ export default function ChangeName() {
 					borderRadius: 15
 				}}
 			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+				<Text style={{ fontSize: 18, color: '#fff' }}>{internalState.text1}</Text>
 			</View>
 		)
 	};

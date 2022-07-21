@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Button } from 'react-native';
 import React from 'react';
+import { Text, View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import tw from 'tailwind-react-native-classnames';
 
@@ -13,15 +13,5 @@ const Splashscreen = () => {
 		</View>
 	);
 };
-
-// define your styles
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#2c3e50'
-	}
-});
 
 export default Splashscreen;

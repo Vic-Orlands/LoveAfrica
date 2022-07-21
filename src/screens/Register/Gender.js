@@ -1,10 +1,10 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import tw from 'tailwind-react-native-classnames';
 import FooterImg from '../../components/FooterImg';
+import tw from 'tailwind-react-native-classnames';
 
 // create a component
 const Gender = () => {

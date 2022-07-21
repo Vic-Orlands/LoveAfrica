@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../components/FooterImg';
+import tw from 'tailwind-react-native-classnames';
 
 // create a component
 const Phone = () => {
