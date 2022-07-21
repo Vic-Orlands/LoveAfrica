@@ -67,10 +67,12 @@ const Likes = () => {
 		const matchUsersInfo = !likes ? getMatchedUserInfo(details.users, user.uid) : null;
 
 		return (
-			<View style={tw`w-1/2  justify-center`}>
+			<View style={tw`w-full`}>
 				{likes ? (
-					<View style={tw`flex justify-evenly items-center`}>
-						<View style={[ tw`w-32 h-32 relative`, { borderRadius: 5, borderWidth: 1 } ]}>
+					<View>
+						<View
+							style={[ tw`w-40 h-40 relative`, { borderRadius: 5, borderWidth: 2, borderColor: '#ddd' } ]}
+						>
 							<Pressable onPress={() => navigation.navigate('ProfileInfo', { user: item })}>
 								<ImageBackground
 									source={{ uri: item.image }}
@@ -92,8 +94,10 @@ const Likes = () => {
 						</View>
 					</View>
 				) : (
-					<View style={tw`flex justify-evenly items-center`}>
-						<View style={[ tw`w-32 h-32 relative`, { borderRadius: 5, borderWidth: 1 } ]}>
+					<View>
+						<View
+							style={[ tw`w-40 h-40 relative`, { borderRadius: 5, borderWidth: 2, borderColor: '#ddd' } ]}
+						>
 							<Pressable onPress={() => navigation.navigate('ProfileInfo', { user: matchUsersInfo })}>
 								<ImageBackground
 									source={{ uri: matchUsersInfo.image }}
@@ -164,18 +168,21 @@ const Likes = () => {
 				{likes ? (
 					<View style={tw`px-6 mb-6 w-full`}>
 						{likedUsers.length > 0 ? (
-							<View style={tw`w-full flex flex-row  justify-evenly items-center`}>
+							<View>
 								<FlatList
 									data={likedUsers}
 									renderItem={Liked}
 									extraData={likedUsers}
-									onRefresh={<p>Loading...</p>}
-									refreshing={likedUsers.length > 0 ? false : true}
 									keyExtractor={(item) => item.id}
+									contentContainerStyle={{
+										flexGrow: 1,
+										justifyContent: 'space-between',
+										flexDirection: 'row'
+									}}
 								/>
 							</View>
 						) : (
-							<View style={tw`w-full flex flex-row  justify-evenly items-center`}>
+							<View style={tw`w-full flex flex-row justify-evenly items-center`}>
 								<Text style={[ { fontFamily: 'Bold', fontSize: 20 }, tw` text-black p-2` ]}>
 									You haven't liked anybody yet
 								</Text>
@@ -185,20 +192,25 @@ const Likes = () => {
 				) : (
 					<View style={tw`px-6 mb-6 w-full`}>
 						{matchedUsers.length > 0 ? (
-							<View style={tw`w-full flex flex-row justify-evenly items-center`}>
+							<View style={tw``}>
 								<FlatList
 									data={matchedUsers}
 									extraData={matchedUsers}
-									onRefresh={<p>Loading...</p>}
 									keyExtractor={(item) => item.id}
-									refreshing={matchedUsers.length > 0 ? false : true}
 									renderItem={({ item }) => <Liked details={item} user={user} />}
+									contentContainerStyle={{
+										flexGrow: 1,
+										justifyContent: 'space-between',
+										flexDirection: 'row'
+									}}
 								/>
 							</View>
 						) : (
-							<Text style={[ { fontFamily: 'Bold', fontSize: 20 }, tw` text-black p-2` ]}>
-								You haven't matched with anybody yet
-							</Text>
+							<View style={tw`w-full flex flex-row justify-evenly items-center`}>
+								<Text style={[ { fontFamily: 'Bold', fontSize: 20 }, tw` text-black p-2` ]}>
+									You haven't matched with anybody yet
+								</Text>
+							</View>
 						)}
 					</View>
 				)}

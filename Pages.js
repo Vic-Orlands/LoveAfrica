@@ -42,6 +42,7 @@ import ChangePhoneNumber from './src/screens/Home/settings/changeDetails/ChangeP
 import ChangeGender from './src/screens/Home/settings/changeDetails/ChangeGender';
 import ChangeAge from './src/screens/Home/settings/changeDetails/ChangeAge';
 import ChangeInterest from './src/screens/Home/settings/changeDetails/ChangeInterest';
+import ChangeName from './src/screens/Home/settings/changeDetails/ChangeName';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -66,7 +67,7 @@ const LoggedInPages = () => {
 				<Stack.Screen name="ChangeGender" component={ChangeGender} options={{ headerShown: false }} />
 				<Stack.Screen name="ChangeAge" component={ChangeAge} options={{ headerShown: false }} />
 				<Stack.Screen name="ChangeInterest" component={ChangeInterest} options={{ headerShown: false }} />
-				{/* <Stack.Screen name="ChangeProfilePicture" component={ChangeProfilePicture} options={{ headerShown: false }} /> */}
+				<Stack.Screen name="ChangeName" component={ChangeName} options={{ headerShown: false }} />
 
 				{/* // for profile update */}
 				<Stack.Screen name="DobInput" component={DobInput} options={{ title: '' }} />
@@ -140,7 +141,7 @@ const MainPages = () => {
 
 	return (
 		<Stack.Navigator>
-			{!user ? (
+			{!user?.photoURL ? (
 				<Stack.Screen name="LoggedOut" component={OffLinePages} options={{ headerShown: false }} />
 			) : (
 				<Stack.Screen name="LoggedIn" component={DrawersRoutes} options={{ headerShown: false }} />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import TopNav from '../../../../components/TopNav';
 import tw from 'tailwind-react-native-classnames';
@@ -112,13 +112,20 @@ export default function ChangeAge() {
 	};
 
 	return (
-		<View style={tw`flex-1 items-center p-4`}>
+		<View
+			style={[
+				tw`flex-1 items-center`,
+				{
+					marginTop: StatusBar.currentHeight
+				}
+			]}
+		>
 			<TopNav Title="Change Age" />
 
 			<View style={tw`flex-1 p-4`}>
 				<View style={tw`mt-14`} />
-				<View style={tw`pt-2`}>
-					<Text style={[ tw` text-xl text-center` ]}> Date of Birth</Text>
+				<View style={tw`pt-2 mb-2`}>
+					<Text style={[ tw` text-2xl text-center font-bold` ]}> Date of Birth</Text>
 				</View>
 				<View style={tw`flex items-center`}>
 					<TouchableOpacity

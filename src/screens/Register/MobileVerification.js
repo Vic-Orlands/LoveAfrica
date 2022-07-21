@@ -1,15 +1,12 @@
 //import liraries
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Pressable } from 'react-native';
+import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import FooterImg from '../../components/FooterImg';
 import tw from 'tailwind-react-native-classnames';
-
-import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
-import { auth } from '../../../firebase';
-
-// import react toastify module
 import Toast from 'react-native-toast-message';
+import { auth } from '../../../firebase';
 
 // create a component
 const MobileVerification = ({ route }) => {
@@ -27,7 +24,7 @@ const MobileVerification = ({ route }) => {
 	const handleConfirmOtp = async () => {
 		try {
 			const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
-			await signInWithCredential(auth, credential).then((response) => {
+			await signInWithCredential(auth, credential).then(() => {
 				navigation.navigate('PhoneSuccess');
 			});
 		} catch (err) {

@@ -34,7 +34,7 @@ export default function ChangeInterest() {
 				Toast.show({
 					type: 'success',
 					position: 'top',
-					text1: `Your password has been changed successfully!`
+					text1: `Your interest preference has been changed successfully!`
 				});
 
 				setTimeout(() => {
@@ -103,7 +103,7 @@ export default function ChangeInterest() {
 				}
 			]}
 		>
-			<TopNav Title="Change Gender" />
+			<TopNav Title="Change Preference" />
 
 			<Toast
 				config={toastConfig}
@@ -113,10 +113,12 @@ export default function ChangeInterest() {
 			/>
 
 			<View style={tw`mt-8`}>
-				<Text style={[ { zIndex: -3 }, tw`text-xl text-center px-8` ]}>Select a gender preference</Text>
+				<Text style={[ { zIndex: -3 }, tw`text-xl text-center px-8 mt-8` ]}>
+					Select an interest preference to change existing preference
+				</Text>
 			</View>
 
-			<Text style={tw`flex items-center mt-4`} />
+			<Text style={tw`flex items-center mb-1 text-2xl`} />
 			<View style={tw`flex flex-row`}>
 				<TouchableOpacity
 					style={[
@@ -169,7 +171,7 @@ export default function ChangeInterest() {
 							tw`text-white text-center  text-base flex items-center text-xl`
 						]}
 					>
-						{!loading ? 'Update Gender' : 'Updating...'}
+						{!loading ? 'Update Preference' : 'Updating...'}
 					</Text>
 				</TouchableOpacity>
 			</View>

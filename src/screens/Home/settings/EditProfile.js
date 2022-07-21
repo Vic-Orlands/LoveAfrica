@@ -194,6 +194,13 @@ const EditProfile = () => {
 					<Text style={[ { fontFamily: 'Bold' }, tw` text-xl` ]}>My Settings</Text>
 
 					<Cards
+						title="Profile Name"
+						slug={profile[0]?.name}
+						yes={<MaterialIcons name="arrow-forward-ios" size={24} color="#cc0000" />}
+						action={() => navigation.navigate('ChangeName')}
+					/>
+
+					<Cards
 						title="Phone Number"
 						slug={profile[0]?.phone_number}
 						yes={<MaterialIcons name="arrow-forward-ios" size={24} color="#cc0000" />}
