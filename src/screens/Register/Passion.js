@@ -78,7 +78,7 @@ const Passion = () => {
 				Toast.show({
 					type: 'error',
 					position: 'top',
-					text1: error,
+					text1: error.code,
 					visibilityTime: 2000,
 					autoHide: true
 				});

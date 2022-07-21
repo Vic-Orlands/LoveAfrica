@@ -76,31 +76,7 @@ const Feeds = () => {
 	const swipeLeft = async (cardIndex) => {
 		if (!profiles[cardIndex]) return;
 		const userSwiped = profiles[cardIndex];
-		console.log(`You swiped NOPE on ${userSwiped.name}`);
 		setDoc(doc(db, 'users', user.uid, 'passes', userSwiped.id), userSwiped);
-	};
-
-	// style the toast messages
-	const toastConfig = {
-		success: (internalState) => (
-			<View
-				style={{
-					height: 65,
-					width: '90%',
-					marginTop: -15,
-					zIndex: 2,
-					backgroundColor: 'green',
-					flex: 1,
-					alignItems: 'center',
-					justifyContent: 'center',
-					borderWidth: 1,
-					borderColor: '#ccc',
-					borderRadius: 15
-				}}
-			>
-				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
-			</View>
-		)
 	};
 
 	const swipeBottom = async (cardIndex) => {
@@ -123,7 +99,6 @@ const Feeds = () => {
 
 		getDoc(doc(db, 'users', userSwiped.id, 'swipes', user.uid)).then((documentSnapshot) => {
 			if (documentSnapshot.exists()) {
-				console.log(`You just matched with ${userSwiped.name}`);
 				setDoc(doc(db, 'users', user.uid, 'swipes', userSwiped.id), userSwiped);
 
 				setDoc(doc(db, 'matches', generateId(user.uid, userSwiped.id)), {
@@ -153,6 +128,29 @@ const Feeds = () => {
 			age--;
 		}
 		return age;
+	};
+
+	// style the toast messages
+	const toastConfig = {
+		success: (internalState) => (
+			<View
+				style={{
+					height: 65,
+					width: '90%',
+					marginTop: -15,
+					zIndex: 2,
+					backgroundColor: 'green',
+					flex: 1,
+					alignItems: 'center',
+					justifyContent: 'center',
+					borderWidth: 1,
+					borderColor: '#ccc',
+					borderRadius: 15
+				}}
+			>
+				<Text style={{ fontSize: 20, color: '#fff' }}>{internalState.text1}</Text>
+			</View>
+		)
 	};
 
 	// like component for right swiping

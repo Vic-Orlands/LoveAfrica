@@ -33,7 +33,6 @@ import EditProfile from './src/screens/Home/settings/EditProfile';
 import ProfileInfo from './src/screens/Home/ProfileInfo';
 import MatchPage from './src/screens/Home/MatchPage';
 import Login from './src/screens/Login/Login';
-import UpdateProfile from './src/screens/Home/settings/SelectImages';
 
 import MyDrawers from './src/components/MyDrawers';
 import useAuth from './src/auth/useAuth';
@@ -81,16 +80,6 @@ const LoggedInPages = () => {
 			{/* // match screen */}
 			<Stack.Group screenOptions={{ presentation: 'transparentModal' }}>
 				<Stack.Screen name="MatchScreen" component={MatchPage} options={{ headerShown: false }} />
-			</Stack.Group>
-			{/* // modal screen */}
-			<Stack.Group screenOptions={{ presentation: 'modal' }}>
-				<Stack.Screen
-					name="UpdateModal"
-					component={UpdateProfile}
-					options={{
-						title: 'Back to Homepage'
-					}}
-				/>
 			</Stack.Group>
 		</Stack.Navigator>
 	);

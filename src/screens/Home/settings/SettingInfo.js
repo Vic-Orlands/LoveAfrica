@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
-// import { useNavigation } from '@react-navigation/native';
+import ActionButton from '../../../components/ActionButton';
 import FooterImg from '../../../components/FooterImg';
+import tw from 'tailwind-react-native-classnames';
 import TopNav from '../../../components/TopNav';
 import Cards from '../../../components/Cards';
-import ActionButton from '../../../components/ActionButton';
-import { deleteUser } from 'firebase/auth';
-import useAuth from '../../../auth/useAuth';
+import DeleteUser from './DeleteUser';
 
 // create a component
 const SettingInfo = () => {
-	const { user } = useAuth();
-	// const navigation = useNavigation();
+	const [ modalVisible, setModalVisible ] = useState(false);
+
+	const handleOpenModal = () => {
+		setModalVisible(!modalVisible);
+	};
+
+	const handleCloseModal = () => {
+		setModalVisible(!modalVisible);
+	};
 
 	return (
 		<SafeAreaView style={[ styles.container, tw`` ]}>
@@ -46,13 +51,15 @@ const SettingInfo = () => {
 									</View>
 
 									<View style={tw`w-full mt-24 flex`}>
-										<ActionButton InfoText="Delete my account." action={() => deleteUser(user)} />
+										<ActionButton InfoText="Delete my account." action={handleOpenModal} />
 									</View>
 								</ScrollView>
 							</View>
 						</View>
 					</View>
 				</View>
+
+				<DeleteUser visible={modalVisible} closeModal={handleCloseModal} />
 			</View>
 			<FooterImg />
 		</SafeAreaView>

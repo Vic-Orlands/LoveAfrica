@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
 	const [ user, setUser ] = useState(null);
 	const [ loadingInitial, setLoadingInitial ] = useState(true);
 
+	// google login
 	const [ request, response, promptAsync ] = Google.useAuthRequest({
 		iosClientId: '911987219804-cv2td9j08n82mc0dd8fske16h0d36tvm.apps.googleusercontent.com',
 		webClientId: '911987219804-dsovtrvgq7beku6pom08t0lsdg0kq4gn.apps.googleusercontent.com',

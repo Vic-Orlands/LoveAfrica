@@ -1,17 +1,15 @@
 import React, { Fragment } from 'react';
 import { TouchableOpacity, Text, View, Image, SafeAreaView, Pressable } from 'react-native';
+import { getAuth, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import loveImage from '../../assets/love_text_black.png';
 import tw from 'tailwind-react-native-classnames';
-
-// import react toastify module
 import Toast from 'react-native-toast-message';
-import { getAuth, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import useAuth from '../auth/useAuth';
 
-const Email = () => {
-	return <MaterialIcons name="email" size={24} color="red" />;
+const Facebook = () => {
+	return <MaterialIcons name="facebook" size={24} color="blue" />;
 };
 const Google = () => {
 	return <AntDesign name="google" size={24} color="orange" />;
@@ -148,22 +146,27 @@ const HomeScreen = () => {
 
 							{/* Google reg */}
 							<Reuse
-								text="Sign up with Google"
+								text="Sign in with Google"
 								iconText={<Google style={tw`text-left`} />}
 								linkTo={GoogleLogin}
 							/>
 
 							{/* Sign in/ Log in */}
 							<Reuse
-								text="Sign in with Email"
-								iconText={<Email style={tw`text-left`} />}
-								linkTo={() => navigation.navigate('Login')}
+								text="Sign in with Facebook"
+								iconText={<Facebook style={tw`text-left`} />}
+								// linkTo={GoogleLogin}
 							/>
+							<Pressable onPress={() => navigation.navigate('Login')}>
+								<Text style={[ { fontFamily: 'Bold' }, tw`text-center text-white font-bold text-xl` ]}>
+									Login
+								</Text>
+							</Pressable>
 						</View>
 
 						<View style={tw`mt-12`} />
 						<Pressable onPress={() => navigation.navigate('RecoverScreen')}>
-							<Text style={[ { fontFamily: 'Bold' }, tw`text-center text-white text-xl` ]}>
+							<Text style={[ { fontFamily: 'Bold' }, tw`text-center text-white font-bold text-xl` ]}>
 								Forgot Password?
 							</Text>
 						</Pressable>

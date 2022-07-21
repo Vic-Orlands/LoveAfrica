@@ -4,14 +4,14 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from 'react-native-phone-number-input';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
-import FooterImg from '../../../components/FooterImg';
+import FooterImg from '../../../../components/FooterImg';
 import tw from 'tailwind-react-native-classnames';
 
 // import react toastify module
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import Toast from 'react-native-toast-message';
-import useAuth from '../../../auth/useAuth';
-import { db } from '../../../../firebase';
+import useAuth from '../../../../auth/useAuth';
+import { db } from '../../../../../firebase';
 
 const UpdateProfile = () => {
 	const { user } = useAuth();
