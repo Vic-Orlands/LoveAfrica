@@ -1,2 +1,2 @@
 # LoveAfrica
-Dating Mobile App. Created with ReactNative
+Dating Mobile App. Created with ReactNative expo
